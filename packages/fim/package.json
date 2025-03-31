@@ -4,11 +4,14 @@
   "version": "0.1.0",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c3-oss/sk.js.git"
+  },
   "bin": {
     "@c3-oss/fim": "./dist/index.js",
     "fim": "./dist/index.js"
   },
-  "repository": "https://github.com/c3-oss/sk.js",
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --clean --silent",
     "build:tsc": "tsc",
