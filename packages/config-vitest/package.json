@@ -1,8 +1,8 @@
 {
   "name": "@c3-oss/config-vitest",
-  "author": "Caian Ertl <caian@c3.do>",
   "description": "Shareable Vitest configurations",
   "version": "0.1.0",
+  "author": "Caian Ertl <caian@c3.do>",
   "type": "commonjs",
   "repository": "https://github.com/c3-oss/sk.js",
   "types": "./dist/index.d.ts",

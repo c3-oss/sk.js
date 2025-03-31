@@ -1,7 +1,8 @@
 {
   "name": "@c3-oss/config-biome",
-  "version": "0.1.0",
   "description": "Shareable Biome configuration",
+  "version": "0.1.0",
+  "author": "Caian Ertl <caian@c3.do>",
   "repository": "https://github.com/c3-oss/sk.js",
   "files": [
     "biome.json"

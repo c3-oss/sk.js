@@ -1,8 +1,8 @@
 {
   "name": "@c3-oss/fim",
-  "author": "Caian Ertl <caian@c3.do>",
   "description": "fim - Figlet IMproved, display large banners of text with customizations",
   "version": "0.1.0",
+  "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "bin": {
     "@c3-oss/fim": "./dist/index.js",
