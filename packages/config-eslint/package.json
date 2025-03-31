@@ -1,0 +1,24 @@
+{
+  "name": "@c3-oss/config-eslint",
+  "version": "0.1.0",
+  "description": "Shareable ESLint configurations",
+  "repository": "https://github.com/c3-oss/sk.js",
+  "files": [
+    "node-ts.js",
+    "node-js-only.js",
+    "fragments/**/*.js"
+  ],
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.16.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-vitest": "^0.5.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5.3.3"
+  }
+}

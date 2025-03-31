@@ -1,0 +1,21 @@
+{
+  "extends": "./base.json",
+  "compilerOptions": {
+    "rootDir": "${configDir}",
+    "noEmit": true
+  },
+  "include": [
+    "${configDir}/src",
+    "${configDir}/@types/**/*.d.ts",
+    "${configDir}/*.config.mts",
+    "${configDir}/*.config.ts",
+    "${configDir}/.eslintrc.cjs",
+    "${configDir}/.eslintrc.js"
+  ],
+  "exclude": [
+    "${configDir}/coverage",
+    "${configDir}/dist",
+    "${configDir}/docs",
+    "${configDir}/node_modules"
+  ]
+}

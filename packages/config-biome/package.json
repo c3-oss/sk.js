@@ -1,0 +1,12 @@
+{
+  "name": "@c3-oss/config-biome",
+  "version": "0.1.0",
+  "description": "Shareable Biome configuration",
+  "repository": "https://github.com/c3-oss/sk.js",
+  "files": [
+    "biome.json"
+  ],
+  "peerDependencies": {
+    "@biomejs/biome": "^1.9.4"
+  }
+}

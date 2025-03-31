@@ -1,0 +1,35 @@
+{
+  "name": "@c3-oss/config-vitest",
+  "author": "Caian Ertl <caian@c3.do>",
+  "description": "Shareable Vitest configurations",
+  "version": "0.1.0",
+  "type": "commonjs",
+  "repository": "https://github.com/c3-oss/sk.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.mts --format cjs,esm --dts --clean --silent",
+    "build:tsc": "tsc",
+    "lint": "eslint src --ext .mts --cache --cache-strategy content",
+    "lint:fix": "npm run lint -- --fix",
+    "clean": "rm -rf node_modules dist .turbo .eslintcache",
+    "bump:dev": "ncu --upgrade --dep dev --target minor",
+    "bump:prod": "ncu --upgrade --dep prod --target minor",
+    "bump:all": "npm run bump:dev && npm run bump:prod"
+  },
+  "devDependencies": {
+    "@c3-oss/config-eslint": "^0.1.0",
+    "@c3-oss/config-typescript": "^0.1.0"
+  },
+  "peerDependencies": {
+    "vitest": "^3.1.1"
+  }
+}

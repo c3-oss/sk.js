@@ -1,0 +1,61 @@
+{
+  "name": "@c3-oss/swissknife",
+  "description": "C3 public NPM packages",
+  "version": "0.0.1",
+  "author": "Caian Ertl <caian@c3.do>",
+  "private": true,
+  "main": "index.js",
+  "license": "ISC",
+  "homepage": "https://github.com/c3-oss/sk.js#readme",
+  "packageManager": "npm@10.9.2",
+  "bugs": {
+    "url": "https://github.com/c3-oss/sk.js/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c3-oss/sk.js.git"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "bump:dev": "ncu --upgrade --dep dev --target minor",
+    "bump:prod": "ncu --upgrade --dep prod --target minor",
+    "bump:opt": "ncu --upgrade --dep optional --target minor",
+    "bump:all": "npm run bump:opt && npm run bump:dev && npm run bump:prod"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "config": {
+    "commitizen": {
+      "path": "@commitlint/cz-commitlint"
+    }
+  },
+  "dependencies": {
+    "@changesets/cli": "^2.28.1",
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@commitlint/cz-commitlint": "^19.8.0",
+    "@swc-node/register": "^1.10.10",
+    "@swc/core": "^1.11.13",
+    "@swc/helpers": "^0.5.15",
+    "@types/node": "^22.13.14",
+    "@vitest/coverage-v8": "^3.1.1",
+    "commitizen": "^4.3.1",
+    "husky": "^9.1.7",
+    "npm-check-updates": "^17.1.16",
+    "tsup": "^8.4.0",
+    "turbo": "^2.4.4",
+    "typedoc": "^0.27.3",
+    "typedoc-plugin-coverage": "^3.4.1",
+    "typedoc-plugin-rename-defaults": "^0.7.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.1.1"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-arm64-gnu": "^4.38.0",
+    "@rollup/rollup-linux-x64-gnu": "^4.38.0"
+  }
+}
