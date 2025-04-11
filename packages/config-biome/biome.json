@@ -27,7 +27,7 @@
       "quoteStyle": "single",
       "semicolons": "asNeeded",
       "arrowParentheses": "always",
-      "indentWidth": 4,
+      "indentWidth": 2,
       "lineWidth": 120
     }
   }
