@@ -1,0 +1,39 @@
+{
+  "name": "@c3-oss/config-tsup",
+  "description": "Shareable Tsup configurations",
+  "version": "0.1.0",
+  "author": "Caian Ertl <caian@c3.do>",
+  "type": "commonjs",
+  "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c3-oss/sk.js.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "concurrently 'tsc' 'tsup --config src/index.ts'",
+    "lint": "biome check .",
+    "lint:fix": "biome format --write .",
+    "clean": "rm -rf dist node_modules .turbo",
+    "bump:dev": "ncu --upgrade --dep dev --target minor",
+    "bump:prod": "ncu --upgrade --dep prod --target minor",
+    "bump:all": "npm run bump:dev && npm run bump:prod"
+  },
+  "devDependencies": {
+    "@c3-oss/config-biome": "^0.1.1",
+    "@c3-oss/config-typescript": "^0.1.0",
+    "concurrently": "^9.1.2"
+  },
+  "dependencies": {
+    "terser": "^5.39.0",
+    "tsup": "^8.4.0"
+  }
+}
