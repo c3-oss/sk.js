@@ -1,5 +1,11 @@
 # @c3-oss/config-biome
 
+## 0.3.1
+
+### Patch Changes
+
+- Enable VCS integration
+
 ## 0.3.0
 
 ### Minor Changes
