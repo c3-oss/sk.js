@@ -7,7 +7,11 @@
   },
   "files": {
     "ignoreUnknown": false,
-    "ignore": []
+    "ignore": [
+      "dist/*",
+      "docs/*",
+      "coverage/*"
+    ]
   },
   "formatter": {
     "enabled": true,
