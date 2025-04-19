@@ -119,7 +119,7 @@ importers:
         version: 8.4.0(@swc/core@1.11.21)(typescript@5.8.3)
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: ^0.1.1
+        specifier: ^0.2.0
         version: link:../config-biome
       '@c3-oss/config-typescript':
         specifier: ^0.1.0
