@@ -3,15 +3,11 @@
   "vcs": {
     "enabled": false,
     "clientKind": "git",
+    "defaultBranch": "master",
     "useIgnoreFile": false
   },
   "files": {
-    "ignoreUnknown": false,
-    "ignore": [
-      "dist/*",
-      "docs/*",
-      "coverage/*"
-    ]
+    "ignoreUnknown": false
   },
   "formatter": {
     "enabled": true,
