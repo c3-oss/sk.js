@@ -20,16 +20,16 @@ _execpkg pkg *args:
 # run a turbo command inside a package -- e.g. "just turbo build auth"
 [group('ALIASES')]
 turbo cmd pkg-name *cmd-args:
-  @npx turbo run {{ cmd }} {{ cmd-args }} --filter="@c3-oss/{{ pkg-name }}"
+  @pnpm turbo run {{ cmd }} {{ cmd-args }} --filter="@c3-oss/{{ pkg-name }}"
 
 [group('ALIASES')]
 turbo-all cmd:
-  @npx turbo run {{ cmd }} --log-order=grouped
+  @pnpm turbo run {{ cmd }} --log-order=grouped
 
 # run commitizen, a CLI tool for generating conventional commits (interactive)
 [group('ALIASES')]
 commit:
-  @npx cz
+  @pnpm cz
 
 # --------------------------------------------------------------------------------------------------
 
@@ -48,7 +48,7 @@ build-all:
 # upgrade all dependencies of all packages (MINOR and PATCH versions only)
 [group('PROJECT MAINTENANCE')]
 bump-all-deps:
-  @npx turbo bump:all
+  @pnpm turbo bump:all
 
 # remove all build artifacts, caches and turbo logs
 [group('PROJECT MAINTENANCE')]
@@ -58,7 +58,7 @@ clean-all:
 # generate code documentation for all packages
 [group('PROJECT MAINTENANCE')]
 update-code-docs:
-  @npx typedoc
+  @pnpm typedoc
 
 # --------------------------------------------------------------------------------------------------
 
@@ -75,7 +75,7 @@ lint-all:
 # run the linter on all packages and fix all auto-fixable issues
 [group('CODE QUALITY')]
 lint-all-fix:
-  @npx turbo lint:fix
+  @pnpm turbo lint:fix
 
 # --------------------------------------------------------------------------------------------------
 
@@ -99,18 +99,18 @@ test-all-coverage:
 # create a package release plan (interactive)
 [group('PACKAGE RELEASING')]
 release-plan:
-  @npx changeset
+  @pnpm changeset
 
 # apply the release plan created by "release-plan"
 [group('PACKAGE RELEASING')]
 release-apply:
-  @npx changeset version
+  @pnpm changeset version
 
 # publish all packages with new versions to the registry
 [group('PACKAGE RELEASING')]
 release-publish:
   @just build-all
-  @npx changeset publish --no-git-tag
+  @pnpm changeset publish --no-git-tag
 
 # prepare to publish packages -- build, lint, test and apply remaining changesets
 [group('PACKAGE RELEASING')]
@@ -123,12 +123,12 @@ release-prepare-publish:
 # enter prerelase mode
 [group('PACKAGE PRE-RELEASING')]
 prerelease-enter:
-  @npx changeset pre enter next
+  @pnpm changeset pre enter next
 
 # exit prerelease mode
 [group('PACKAGE PRE-RELEASING')]
 prerelease-exit:
-  @npx changeset pre exit
+  @pnpm changeset pre exit
 
 # publish generate and publish prerelease package
 [group('PACKAGE PRE-RELEASING')]
