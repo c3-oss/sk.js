@@ -28,7 +28,7 @@
     "bump:all": "npm run bump:dev && npm run bump:prod"
   },
   "devDependencies": {
-    "@c3-oss/config-biome": "^0.1.1",
+    "@c3-oss/config-biome": "^0.2.0",
     "@c3-oss/config-typescript": "^0.1.0",
     "concurrently": "^9.1.2"
   },
