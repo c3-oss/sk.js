@@ -119,10 +119,10 @@ importers:
         version: 8.4.0(@swc/core@1.11.21)(typescript@5.8.3)
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: ^0.3.0
+        specifier: workspace:^0.3.0
         version: link:../config-biome
       '@c3-oss/config-typescript':
-        specifier: ^0.1.0
+        specifier: workspace:^0.1.0
         version: link:../config-typescript
       concurrently:
         specifier: ^9.1.2
@@ -141,10 +141,10 @@ importers:
         version: 3.1.1(@types/node@22.14.1)
     devDependencies:
       '@c3-oss/config-eslint':
-        specifier: ^0.1.0
+        specifier: workspace:^0.1.0
         version: link:../config-eslint
       '@c3-oss/config-typescript':
-        specifier: ^0.1.0
+        specifier: workspace:^0.1.0
         version: link:../config-typescript
 
   packages/fim:
@@ -160,13 +160,13 @@ importers:
         version: 2.5.1
     devDependencies:
       '@c3-oss/config-eslint':
-        specifier: ^0.1.0
+        specifier: workspace:^0.1.0
         version: link:../config-eslint
       '@c3-oss/config-typescript':
-        specifier: ^0.1.0
+        specifier: workspace:^0.1.0
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: ^0.1.0
+        specifier: workspace:^0.1.0
         version: link:../config-vitest
       '@types/figlet':
         specifier: ^1.7.0
@@ -180,6 +180,18 @@ importers:
       vitest:
         specifier: ^3.1.1
         version: 3.1.1(@types/node@22.14.1)
+
+  packages/types:
+    devDependencies:
+      '@c3-oss/config-biome':
+        specifier: workspace:^0.3.1
+        version: link:../config-biome
+      '@c3-oss/config-tsup':
+        specifier: workspace:^0.2.0
+        version: link:../config-tsup
+      '@c3-oss/config-typescript':
+        specifier: workspace:^0.1.0
+        version: link:../config-typescript
 
 packages:
 
