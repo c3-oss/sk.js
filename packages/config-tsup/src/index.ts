@@ -1,11 +1,15 @@
 import { defineConfig } from 'tsup'
 
-export default defineConfig({
+export const configBase = defineConfig({
   entry: ['src/index.ts'],
   format: ['cjs', 'esm'],
   dts: true,
   clean: true,
   silent: true,
+})
+
+export const configMinified = defineConfig({
+  ...configBase,
   minify: 'terser',
   terserOptions: {
     compress: {
@@ -18,3 +22,5 @@ export default defineConfig({
     },
   },
 })
+
+export default configMinified
