@@ -181,6 +181,21 @@ importers:
         specifier: ^3.1.1
         version: 3.1.1(@types/node@22.14.1)
 
+  packages/typeguard:
+    devDependencies:
+      '@c3-oss/config-biome':
+        specifier: workspace:^0.3.1
+        version: link:../config-biome
+      '@c3-oss/config-tsup':
+        specifier: workspace:^0.2.0
+        version: link:../config-tsup
+      '@c3-oss/config-typescript':
+        specifier: workspace:^0.1.0
+        version: link:../config-typescript
+      '@c3-oss/types':
+        specifier: workspace:^0.1.0
+        version: link:../types
+
   packages/types:
     devDependencies:
       '@c3-oss/config-biome':
