@@ -29,8 +29,8 @@
     "bump:all": "npm run bump:dev && npm run bump:prod"
   },
   "devDependencies": {
-    "@c3-oss/config-eslint": "^0.1.0",
-    "@c3-oss/config-typescript": "^0.1.0"
+    "@c3-oss/config-eslint": "workspace:^0.1.0",
+    "@c3-oss/config-typescript": "workspace:^0.1.0"
   },
   "peerDependencies": {
     "vitest": "^3.1.1"
