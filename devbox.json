@@ -1,13 +1,25 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.2/.schema/devbox.schema.json",
   "packages": [
+    "gitleaks@8.28.0",
+    "go@1.25.0",
+    "hadolint@2.12.0",
+    "jq@1.8.1",
+    "just@1.42.4",
     "nodejs@22.14.0",
-    "just@1.40.0",
-    "pnpm@latest"
+    "openapi-generator-cli@7.14.0",
+    "pipx@1.7.1",
+    "python@3.13.3",
+    "shellcheck@0.10.0",
+    "shfmt@3.12.0",
+    "uv@0.8.14"
   ],
+  "env": {
+    "DEVBOX_COREPACK_ENABLED": "true"
+  },
   "shell": {
     "init_hook": [
-      "echo 'Welcome to devbox!' > /dev/null"
+      "pnpm install"
     ],
     "scripts": {
       "test": [
