@@ -7,7 +7,7 @@
   "main": "index.js",
   "license": "ISC",
   "homepage": "https://github.com/c3-oss/sk.js#readme",
-  "packageManager": "pnpm@8.15.5",
+  "packageManager": "pnpm@10.8.1",
   "bugs": {
     "url": "https://github.com/c3-oss/sk.js/issues"
   },
@@ -23,6 +23,7 @@
     "bump:all": "npm run bump:opt && npm run bump:dev && npm run bump:prod"
   },
   "workspaces": [
+    "apps/*",
     "packages/*"
   ],
   "engines": {
@@ -34,17 +35,21 @@
     }
   },
   "dependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@changesets/cli": "^2.28.1",
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
     "@commitlint/cz-commitlint": "^19.8.0",
+    "@modelcontextprotocol/inspector": "^0.16.8",
     "@swc-node/register": "^1.10.10",
     "@swc/core": "^1.11.13",
     "@swc/helpers": "^0.5.15",
     "@types/node": "^22.13.14",
     "@vitest/coverage-v8": "^3.1.1",
     "commitizen": "^4.3.1",
+    "concurrently": "^9.2.1",
     "husky": "^9.1.7",
+    "inquirer": "^12.9.6",
     "npm-check-updates": "^17.1.16",
     "tsup": "^8.4.0",
     "turbo": "^2.4.4",
@@ -54,7 +59,6 @@
     "typescript": "^5.8.2",
     "vitest": "^3.1.1"
   },
-  "devDependencies": {},
   "optionalDependencies": {
     "@rollup/rollup-linux-arm64-gnu": "^4.38.0",
     "@rollup/rollup-linux-x64-gnu": "^4.38.0"
