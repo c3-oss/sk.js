@@ -38,6 +38,12 @@
         "^lint:fix"
       ]
     },
+    "lint:fix-unsafe": {
+      "cache": true,
+      "dependsOn": [
+        "^lint:fix-unsafe"
+      ]
+    },
     "clean": {
       "cache": false,
       "dependsOn": [
