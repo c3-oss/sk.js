@@ -1,0 +1,6 @@
+{
+  "extends": "@c3-oss/config-typescript/lib.json",
+  "compilerOptions": {
+    "jsx": "react-jsx"
+  }
+}
