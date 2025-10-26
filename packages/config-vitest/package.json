@@ -9,9 +9,7 @@
     "type": "git",
     "url": "git+https://github.com/c3-oss/sk.js.git"
   },
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
@@ -21,15 +19,16 @@
   "scripts": {
     "build": "tsup src/index.mts --format cjs,esm --dts --clean --silent",
     "build:tsc": "tsc",
-    "lint": "eslint src --ext .mts --cache --cache-strategy content",
-    "lint:fix": "npm run lint -- --fix",
-    "clean": "rm -rf node_modules dist .turbo .eslintcache",
+    "lint": "biome check .",
+    "lint:fix": "biome format --write .",
+    "lint:fix-unsafe": "biome check --fix --unsafe .",
+    "clean": "rm -rf coverage dist node_modules .turbo",
     "bump:dev": "ncu --upgrade --dep dev --target minor",
     "bump:prod": "ncu --upgrade --dep prod --target minor",
     "bump:all": "npm run bump:dev && npm run bump:prod"
   },
   "devDependencies": {
-    "@c3-oss/config-eslint": "workspace:^0.1.0",
+    "@c3-oss/config-biome": "workspace:^0.3.0",
     "@c3-oss/config-typescript": "workspace:^0.1.0"
   },
   "peerDependencies": {

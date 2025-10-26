@@ -1,6 +1,6 @@
 import { defineConfig } from 'vitest/config'
 
-const nestedFilesGlob = (...filenames: string[]): string[] => filenames.map(f => `**/**/${f}.+(ts|cts|mts)`)
+const nestedFilesGlob = (...filenames: string[]): string[] => filenames.map((f) => `**/**/${f}.+(ts|cts|mts)`)
 
 export const vitestConfig = defineConfig({
   test: {
@@ -15,8 +15,8 @@ export const vitestConfig = defineConfig({
         '*.mjs',
         'dist/**',
         'docs/**',
-        ...nestedFilesGlob('*.config', '*.interface', '*.dto', '*.spec', '*.test', 'inactive*', 'index')
-      ]
-    }
-  }
+        ...nestedFilesGlob('*.config', '*.interface', '*.dto', '*.spec', '*.test', 'inactive*', 'index'),
+      ],
+    },
+  },
 })
