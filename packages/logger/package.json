@@ -1,0 +1,43 @@
+{
+  "name": "@c3-oss/logger",
+  "description": "Reusable Pino logger",
+  "version": "0.1.0",
+  "author": "Caian Ertl <caian@c3.do>",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c3-oss/sk.js.git"
+  },
+  "files": ["dist"],
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "start": "node --import @swc-node/register/esm-register src/index.ts",
+    "build": "concurrently tsc tsup",
+    "lint": "biome check .",
+    "lint:fix": "biome check --fix .",
+    "lint:fix-unsafe": "biome check --fix --unsafe .",
+    "clean": "rm -rf coverage dist node_modules .turbo",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage --reporter=verbose",
+    "bump:dev": "ncu --upgrade --dep dev --target minor",
+    "bump:prod": "ncu --upgrade --dep prod --target minor",
+    "bump:all": "npm run bump:dev && npm run bump:prod"
+  },
+  "dependencies": {
+    "@c3-oss/magic-values": "workspace:^1.0.0",
+    "pino": "^9.11.0",
+    "pino-pretty": "^13.1.1"
+  },
+  "devDependencies": {
+    "@c3-oss/config-biome": "workspace:^0.3.1",
+    "@c3-oss/config-tsup": "workspace:^0.2.0",
+    "@c3-oss/config-typescript": "workspace:^0.1.0",
+    "@c3-oss/config-vitest": "workspace:^0.1.0"
+  }
+}
