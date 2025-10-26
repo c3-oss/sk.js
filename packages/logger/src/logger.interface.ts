@@ -1,5 +1,5 @@
 // c3
-import type { LogLevel, NodeEnv } from '@c3-corp/magic-values'
+import type { LogLevel, NodeEnv } from '@c3-oss/magic-values'
 
 // -------------------------------------------------------------------------------------------------
 
