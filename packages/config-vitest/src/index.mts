@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitest/config'
+import { defineConfig, type ViteUserConfig } from 'vitest/config'
 
 const nestedFilesGlob = (...filenames: string[]): string[] => filenames.map((f) => `**/**/${f}.+(ts|cts|mts)`)
 
@@ -19,4 +19,4 @@ export const vitestConfig = defineConfig({
       ],
     },
   },
-})
+}) satisfies ViteUserConfig

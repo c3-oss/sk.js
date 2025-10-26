@@ -3,7 +3,7 @@
   "description": "Shareable Vitest configurations",
   "version": "0.1.0",
   "author": "Caian Ertl <caian@c3.do>",
-  "type": "commonjs",
+  "type": "module",
   "types": "./dist/index.d.ts",
   "repository": {
     "type": "git",
@@ -12,8 +12,9 @@
   "files": ["dist"],
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "scripts": {
