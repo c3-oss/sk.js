@@ -22,6 +22,7 @@ _execpkg pkg *args:
 turbo cmd pkg-name *cmd-args:
   @pnpm turbo run {{ cmd }} {{ cmd-args }} --filter="@c3-oss/{{ pkg-name }}"
 
+# run a turbo command on all packages
 [group('ALIASES')]
 turbo-all cmd:
   @pnpm turbo run {{ cmd }} --log-order=grouped
@@ -30,6 +31,11 @@ turbo-all cmd:
 [group('ALIASES')]
 commit:
   @pnpm cz
+
+# inspect an MCP server
+[group('ALIASES')]
+mcp-inspect server:
+  @pnpm mcp-inspector --config mcp-server-config.json --server {{ server }}
 
 # --------------------------------------------------------------------------------------------------
 
@@ -77,6 +83,11 @@ lint-all:
 lint-all-fix:
   @pnpm turbo lint:fix
 
+# run the linter on all packages and fix all auto-fixable issues
+[group('CODE QUALITY')]
+lint-all-fix-unsafe:
+  @pnpm turbo lint:fix-unsafe
+
 # --------------------------------------------------------------------------------------------------
 
 # run tests on the package with the given name -- e.g. "just test auth"
@@ -117,6 +128,11 @@ release-publish:
 release-prepare-publish:
   @turbo run build lint test
   @just release-apply
+
+# git commit for each package that will be released
+[group('PACKAGE RELEASING')]
+release-commit:
+  @./commit-release.sh
 
 # --------------------------------------------------------------------------------------------------
 
