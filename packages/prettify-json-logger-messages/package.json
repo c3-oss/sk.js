@@ -12,7 +12,9 @@
     "@c3-oss/prettify-json-logger-messages": "./dist/index.js",
     "prettify-json-logger-messages": "./dist/index.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -39,7 +41,7 @@
     "@c3-oss/config-biome": "workspace:^0.3.1",
     "@c3-oss/config-tsup": "workspace:^0.2.0",
     "@c3-oss/config-typescript": "workspace:^0.1.0",
-    "@c3-oss/config-vitest": "workspace:^0.1.0",
+    "@c3-oss/config-vitest": "workspace:^0.2.0",
     "concurrently": "^9.1.2",
     "npm-check-updates": "^17.1.18"
   }
