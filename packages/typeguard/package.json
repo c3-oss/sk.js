@@ -19,6 +19,7 @@
     "build": "concurrently tsc tsup",
     "lint": "biome check .",
     "lint:fix": "biome format --write .",
+    "lint:fix-unsafe": "biome check --fix --unsafe .",
     "clean": "rm -rf coverage dist node_modules .turbo",
     "bump:dev": "ncu --upgrade --dep dev --target minor",
     "bump:prod": "ncu --upgrade --dep prod --target minor",
