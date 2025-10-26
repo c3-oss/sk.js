@@ -5,17 +5,15 @@ import chalk from 'chalk'
 
 export const indentBanner =
   (indentLevel: number) =>
-    (banner: string): string =>
-      indentLevel === 0
-        ? banner
-        : banner
-            .split('\n')
-            .map(line => ' '.repeat(indentLevel) + line)
-            .join('\n')
+  (banner: string): string =>
+    indentLevel === 0
+      ? banner
+      : banner
+          .split('\n')
+          .map((line) => ' '.repeat(indentLevel) + line)
+          .join('\n')
 
 export const colorizeBanner =
   (style: string) =>
-    (banner: string): string =>
-      style.trim().length === 0
-        ? banner
-        : chalk`{${style} ${banner}}`
+  (banner: string): string =>
+    style.trim().length === 0 ? banner : chalk`{${style} ${banner}}`

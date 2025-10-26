@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
 // standard
-import util from 'util'
+import util from 'node:util'
 
 // 3rd-party
 import chalk from 'chalk'
 import figlet, { type Fonts } from 'figlet'
 
 // internal
-import { type FIMArgs } from './dtos/fim-args.dto.js'
+import type { FIMArgs } from './dtos/fim-args.dto.js'
 
 import cli from './implementations/cli.js'
-import { indentBanner, colorizeBanner } from './implementations/format.js'
+import { colorizeBanner, indentBanner } from './implementations/format.js'
 import { flow } from './implementations/misc.js'
 
 /* ---------------------------------------------------------------------------------------------- */
@@ -24,7 +24,7 @@ const tryParsingArgs = (): FIMArgs => {
   }
 }
 
-const main = (): void => {
+const main = () => {
   const { text, font, list, style, indent, showcase } = tryParsingArgs()
 
   /* ... */
@@ -60,14 +60,13 @@ const main = (): void => {
   const applyShowcaseFormatting = flow(indentBanner(6), colorizeBanner('bold.cyan'))
 
   const sc = availableFonts
-    .map(f => {
+    .flatMap((f) => {
       const m = util.format(" ~~~~ Font '%s':", f)
       const t = chalk.gray(m)
       const b = figlet.textSync(text, f as Fonts)
 
       return [t, '', applyShowcaseFormatting(b), '', '']
     })
-    .flat()
     .join('\n')
 
   return cli.bye(sc)

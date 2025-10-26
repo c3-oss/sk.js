@@ -15,9 +15,10 @@
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --clean --silent",
     "build:tsc": "tsc",
-    "lint": "eslint src --ext .ts --cache --cache-strategy content",
-    "lint:fix": "npm run lint -- --fix",
-    "clean": "rm -rf coverage dist node_modules .turbo .eslintcache",
+    "lint": "biome check .",
+    "lint:fix": "biome format --write .",
+    "lint:fix-unsafe": "biome check --fix --unsafe .",
+    "clean": "rm -rf coverage dist node_modules .turbo",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage --reporter=verbose",
     "bump:dev": "ncu --upgrade --dep dev --target minor",
@@ -25,17 +26,17 @@
     "bump:all": "npm run bump:dev && npm run bump:prod"
   },
   "devDependencies": {
-    "@c3-oss/config-eslint": "workspace:^0.1.0",
+    "@c3-oss/config-biome": "workspace:^0.3.0",
     "@c3-oss/config-typescript": "workspace:^0.1.0",
     "@c3-oss/config-vitest": "workspace:^0.1.0",
     "@types/figlet": "^1.7.0",
     "@vitest/coverage-v8": "^3.1.1",
-    "vitest": "^3.1.1",
-    "npm-check-updates": "^17.1.16"
+    "npm-check-updates": "^17.1.16",
+    "vitest": "^3.1.1"
   },
   "dependencies": {
     "chalk": "^4.1.2",
-    "figlet": "^1.8.0",
+    "figlet": "^1.8.2",
     "ts-command-line-args": "^2.5.1"
   }
 }
