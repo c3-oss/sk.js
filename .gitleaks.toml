@@ -1,0 +1,17 @@
+[extend]
+useDefault = true
+
+
+[allowlist]
+paths = [
+    '''.c3/''',
+    '''.devbox/''',
+    '''.dist/''',
+    '''.env''',
+    '''.terraform/''',
+    '''.turbo/''',
+    '''devbox.lock''',
+    '''mcp-server-config.json''',
+    '''node_modules/''',
+    # ...
+]
