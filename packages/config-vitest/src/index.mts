@@ -4,6 +4,7 @@ const nestedFilesGlob = (...filenames: string[]): string[] => filenames.map((f) 
 
 export const vitestConfig = defineConfig({
   test: {
+    passWithNoTests: true,
     coverage: {
       all: true,
       provider: 'v8',
