@@ -1,7 +1,7 @@
 {
   "name": "@c3-oss/config-vitest",
   "description": "Shareable Vitest configurations",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "types": "./dist/index.d.ts",

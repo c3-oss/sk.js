@@ -352,7 +352,7 @@ importers:
         specifier: workspace:^0.1.0
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.3.0
         version: link:../config-vitest
       '@types/pg':
         specifier: ^8.15.5
@@ -377,7 +377,7 @@ importers:
         specifier: workspace:^0.1.0
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.3.0
         version: link:../config-vitest
       '@types/figlet':
         specifier: ^1.7.0
@@ -411,7 +411,7 @@ importers:
         specifier: workspace:^0.1.0
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.3.0
         version: link:../config-vitest
 
   packages/ink-figlet:
@@ -436,7 +436,7 @@ importers:
         specifier: workspace:^0.1.0
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.3.0
         version: link:../config-vitest
       '@types/figlet':
         specifier: ^1.7.0
@@ -467,7 +467,7 @@ importers:
         specifier: workspace:^0.1.0
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.3.0
         version: link:../config-vitest
 
   packages/magic-values:
@@ -486,7 +486,7 @@ importers:
         specifier: workspace:^0.1.0
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.3.0
         version: link:../config-vitest
 
   packages/prettify-json-logger-messages:
@@ -505,7 +505,7 @@ importers:
         specifier: workspace:^0.1.0
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.3.0
         version: link:../config-vitest
       concurrently:
         specifier: ^9.1.2
