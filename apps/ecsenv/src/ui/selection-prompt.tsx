@@ -36,7 +36,7 @@ const SelectionPrompt = ({ title, options, onSelect, onCancel }: SelectionPrompt
     const start = selectedIndex - half
     const maxStart = filtered.length - MAX_VISIBLE_ITEMS
     return Math.max(0, Math.min(start, maxStart))
-  }, [filtered.length, MAX_VISIBLE_ITEMS, selectedIndex])
+  }, [filtered.length, selectedIndex])
 
   const visibleItems = filtered.slice(windowStart, windowStart + MAX_VISIBLE_ITEMS)
 
