@@ -1,0 +1,62 @@
+{
+  "name": "@c3-oss/ecsenv",
+  "description": "Fetch ECS Environments - Interactive TUI for injecting AWS ECS secrets and environment variables",
+  "version": "0.1.0",
+  "author": "Caian Ertl <caian@c3.do>",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c3-oss/sk.js.git"
+  },
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "bin": {
+    "ecsenv": "./dist/index.js"
+  },
+  "scripts": {
+    "start": "node -r dotenv-expand/config --import @swc-node/register/esm-register src/index.ts",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean --silent",
+    "lint": "biome check .",
+    "lint:fix": "biome check --fix .",
+    "lint:fix-unsafe": "biome check --fix --unsafe .",
+    "clean": "rm -rf coverage dist node_modules .turbo",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "bump:dev": "ncu --upgrade --dep dev --target minor",
+    "bump:prod": "ncu --upgrade --dep prod --target minor",
+    "bump:all": "npm run bump:dev && npm run bump:prod"
+  },
+  "dependencies": {
+    "@aws-sdk/client-ecs": "^3.864.0",
+    "@aws-sdk/client-secrets-manager": "^3.864.0",
+    "@c3-oss/aws-wrapper-ecs": "workspace:^",
+    "@c3-oss/logger": "workspace:^",
+    "@c3-oss/typeguard": "workspace:^",
+    "fp-ts": "^2.16.11",
+    "fs-extra": "^11.3.1",
+    "ink": "^6.3.1",
+    "react": "^19.1.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@c3-oss/config-biome": "workspace:^",
+    "@c3-oss/config-tsup": "workspace:^",
+    "@c3-oss/config-typescript": "workspace:^",
+    "@c3-oss/config-vitest": "workspace:^",
+    "@swc-node/register": "^1.11.1",
+    "@swc/core": "^1.13.3",
+    "@types/fs-extra": "^11.0.4",
+    "@types/react": "^19.1.13",
+    "dotenv": "^17.2.1",
+    "dotenv-expand": "^12.0.2",
+    "npm-check-updates": "^18.0.2",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

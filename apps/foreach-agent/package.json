@@ -1,0 +1,53 @@
+{
+  "name": "@c3-oss/foreach-agent",
+  "description": "Terminal UI to run prompt templates across multiple AI coding agents",
+  "version": "0.1.0",
+  "author": "Caian Ertl <caian@c3.do>",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/c3-oss/sk.js.git"
+  },
+  "files": ["dist"],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./cli": {
+      "import": "./dist/cli.js",
+      "require": "./dist/cli.cjs"
+    }
+  },
+  "bin": {
+    "foreach-agent": "./dist/cli.js"
+  },
+  "scripts": {
+    "start": "node --import @swc-node/register/esm-register src/cli.ts",
+    "build": "tsup src/index.ts src/cli.ts --format cjs,esm --dts --clean --silent",
+    "lint": "biome check .",
+    "lint:fix": "biome check --fix .",
+    "lint:fix-unsafe": "biome check --fix --unsafe .",
+    "clean": "rm -rf coverage dist node_modules .turbo",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
+  },
+  "dependencies": {
+    "filtrex": "^3.1.0",
+    "ink": "^6.3.1",
+    "liquidjs": "^10.24.0",
+    "react": "^19.1.1",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@c3-oss/config-biome": "workspace:^",
+    "@c3-oss/config-typescript": "workspace:^",
+    "@c3-oss/config-vitest": "workspace:^",
+    "@swc-node/register": "^1.11.1",
+    "@swc/core": "^1.13.5",
+    "@types/node": "^24.9.1",
+    "@types/react": "^19.1.13",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3"
+  }
+}
