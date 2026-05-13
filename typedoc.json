@@ -10,7 +10,9 @@
   "exclude": [
     "**/**/*.+(cts|mts)",
     "**/**/*.+(test|spec).ts",
-    "packages/*-config"
+    "packages/config-biome",
+    "packages/config-eslint",
+    "packages/config-typescript"
   ],
   "plugin": [
     "typedoc-plugin-coverage",

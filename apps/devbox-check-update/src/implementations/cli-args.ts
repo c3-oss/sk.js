@@ -1,18 +1,33 @@
 import { existsSync } from 'node:fs'
 import path from 'node:path'
 
+/**
+ * Parsed command-line options for a devbox-check-update run.
+ */
 export interface DevboxCheckUpdateArgs {
+  /** Path to a devbox.json file or a directory containing one. */
   targetPath: string
+  /** Package names to pass through to `devbox update`. */
   packages: string[]
+  /** Whether to run the update against a temporary project copy. */
   dryRun: boolean
+  /** Whether to allow `devbox update` to install packages after changing the lockfile. */
   install: boolean
+  /** Whether to pass `--all-projects` to Devbox. */
   allProjects: boolean
+  /** Whether to pass `--sync-lock` to Devbox. */
   syncLock: boolean
+  /** Optional Devbox environment name to update. */
   environment?: string
+  /** Whether Devbox subprocess output should be quiet. */
   quiet: boolean
+  /** Whether the CLI should print help and exit. */
   help: boolean
 }
 
+/**
+ * Usage text printed by the CLI when `--help` is passed.
+ */
 export const HELP_TEXT = `devbox-check-update
 
 Usage:
@@ -33,6 +48,9 @@ Options:
   -q, --quiet         Suppress logs from devbox update
   -h, --help          Prints this usage guide`
 
+/**
+ * Reads the value following a flag and reports a CLI-shaped error when it is absent.
+ */
 const readFlagValue = (argv: readonly string[], index: number, name: string): string => {
   const value = argv[index + 1]
   if (value === undefined || value.startsWith('-')) {
@@ -42,6 +60,9 @@ const readFlagValue = (argv: readonly string[], index: number, name: string): st
   return value
 }
 
+/**
+ * Heuristically distinguishes a project path from a package name in positional arguments.
+ */
 const isLikelyPath = (value: string): boolean =>
   value === '.' ||
   value === '..' ||
@@ -51,6 +72,9 @@ const isLikelyPath = (value: string): boolean =>
   value.startsWith('.') ||
   existsSync(path.resolve(value))
 
+/**
+ * Parses devbox-check-update arguments into normalized options for the runner.
+ */
 export const parseArgs = (argv: readonly string[] = process.argv.slice(2)): DevboxCheckUpdateArgs => {
   const positionals: string[] = []
   const args: DevboxCheckUpdateArgs = {

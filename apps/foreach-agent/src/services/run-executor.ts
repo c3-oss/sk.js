@@ -10,17 +10,25 @@ import { durationMs, nowIso } from '../utils/time.js'
 import { buildTranscriptPath, createRunPaths, savePromptFile, saveRunRecord } from './store.js'
 import { renderTemplate } from './template-engine.js'
 
-interface ExecuteRunHandlers {
+/** Progress callbacks emitted while a run is executing. */
+export interface ExecuteRunHandlers {
+  /** Called after the run record is saved. */
   readonly onRunUpdate?: (run: RunRecord) => void
+  /** Called when a task snapshot changes. */
   readonly onTaskUpdate?: (task: TaskRecord) => void
 }
 
+/** Result of one provider process attempt. */
 interface AttemptResult {
+  /** Whether the provider completed without an inferred error. */
   readonly success: boolean
+  /** Final assistant output if the attempt succeeded. */
   readonly finalOutput?: string
+  /** Failure reason if the attempt failed. */
   readonly errorMessage?: string
 }
 
+/** Keeps task log payloads bounded while preserving the newest lines. */
 const trimLogs = (logs: readonly PrettyLogLine[]): readonly PrettyLogLine[] => {
   const maxLines = 300
   if (logs.length <= maxLines) {
@@ -36,16 +44,19 @@ const trimLogs = (logs: readonly PrettyLogLine[]): readonly PrettyLogLine[] => {
   return [truncationNotice, ...logs.slice(logs.length - (maxLines - 1))]
 }
 
+/** Appends one normalized log line to a task. */
 const appendTaskLog = (task: TaskRecord, line: PrettyLogLine): TaskRecord => ({
   ...task,
   prettyLogs: trimLogs([...task.prettyLogs, line]),
 })
 
+/** Updates one task inside an immutable run snapshot. */
 const updateTaskById = (run: RunRecord, taskId: string, mutator: (task: TaskRecord) => TaskRecord): RunRecord => ({
   ...run,
   tasks: run.tasks.map((task) => (task.id === taskId ? mutator(task) : task)),
 })
 
+/** Derives the final run status from all task states. */
 const computeRunStatus = (tasks: readonly TaskRecord[]): RunRecord['status'] => {
   const hasRunning = tasks.some((task) => task.status === 'running' || task.status === 'pending')
   if (hasRunning) {
@@ -56,6 +67,7 @@ const computeRunStatus = (tasks: readonly TaskRecord[]): RunRecord['status'] => 
   return hasFailures ? 'failed' : 'completed'
 }
 
+/** Persists a raw stream or metadata line to the task transcript. */
 const appendRawLine = async (
   transcriptFilePath: string,
   stream: 'stdout' | 'stderr' | 'meta',
@@ -70,6 +82,7 @@ const appendRawLine = async (
   })
 }
 
+/** Runs one provider process attempt and streams parsed output to the caller. */
 const executeAttempt = async (
   task: TaskRecord,
   prompt: string,
@@ -228,6 +241,7 @@ const executeAttempt = async (
   })
 }
 
+/** Renders prompts, schedules provider tasks, retries failures, and persists run state. */
 export const executeRun = async (
   config: RunConfig,
   templateContent: string,

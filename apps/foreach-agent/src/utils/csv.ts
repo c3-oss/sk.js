@@ -1,3 +1,4 @@
+/** Escapes one cell according to RFC 4180-style CSV quoting rules. */
 const escapeCsv = (value: string): string => {
   if (value.includes(',') || value.includes('"') || value.includes('\n')) {
     return `"${value.replaceAll('"', '""')}"`
@@ -6,6 +7,7 @@ const escapeCsv = (value: string): string => {
   return value
 }
 
+/** Serializes homogeneous string rows to CSV with a header row. */
 export const toCsv = (rows: readonly Record<string, string>[]): string => {
   if (rows.length === 0) {
     return ''

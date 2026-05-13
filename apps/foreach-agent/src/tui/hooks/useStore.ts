@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import type { RunSummary, TemplateFile } from '../../dtos/types.js'
 import { ensureStorage, listRuns, listTemplates } from '../../services/store.js'
 
+/** Loads template and run summary data used by the TUI. */
 export const useStore = () => {
   const [templates, setTemplates] = useState<readonly TemplateFile[]>([])
   const [runs, setRuns] = useState<readonly RunSummary[]>([])

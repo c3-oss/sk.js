@@ -11,6 +11,7 @@ import {
   runStatusFilters,
 } from '../helpers/styles.js'
 
+/** Maintains run-history filters and returns the filtered run list. */
 export const useRunFilters = (runs: readonly RunSummary[]) => {
   const [statusFilter, setStatusFilter] = useState<RunStatusFilter>('all')
   const [providerFilter, setProviderFilter] = useState<Provider | 'all'>('all')

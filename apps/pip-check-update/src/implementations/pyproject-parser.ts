@@ -3,41 +3,76 @@ import path from 'node:path'
 
 import * as TOML from 'smol-toml'
 
+/**
+ * Supported dependency declaration formats in pyproject.toml.
+ */
 export type PyProjectFormat = 'poetry' | 'uv'
+
+/**
+ * Supported lock/sync managers for dependency updates.
+ */
 export type PyProjectManager = 'poetry' | 'uv'
 
+/**
+ * Parsed dependency with the source location needed to update the original TOML.
+ */
 export interface ParsedDependency {
+  /** Package name as declared in pyproject.toml. */
   name: string
+  /** Version extracted from the current constraint. */
   currentVersion: string
+  /** Original version constraint text. */
   rawConstraint: string
+  /** Dependency group name, or `main` for primary dependencies. */
   group: string
+  /** TOML section and key that contain the dependency declaration. */
   location: {
+    /** TOML section path containing the dependency. */
     section: string
+    /** TOML key or dependency string used for replacement. */
     key: string
   }
 }
 
+/**
+ * Parsed pyproject.toml content and extracted dependencies.
+ */
 export interface PyProjectData {
+  /** Dependency declaration format detected from the parsed TOML. */
   format: PyProjectFormat
+  /** Package manager selected for lockfile synchronization. */
   manager: PyProjectManager
+  /** Absolute path to the pyproject.toml file. */
   filePath: string
+  /** Original TOML content before any updates. */
   rawContent: string
+  /** Parsed TOML object. */
   parsed: Record<string, unknown>
+  /** Dependencies that include parseable version constraints. */
   dependencies: ParsedDependency[]
 }
 
+/**
+ * Extracts the comparable version token from a Poetry-style constraint.
+ */
 const extractPoetryVersion = (constraint: string): string => {
   const match = constraint.match(/[\^~]?([0-9][0-9a-zA-Z.!+_-]*)/)
 
   return match?.[1] ?? ''
 }
 
+/**
+ * Extracts the comparable version token from a PEP 508 constraint.
+ */
 const extractPEP508Version = (constraint: string): string => {
   const match = constraint.match(/[><=~!]=?\s*([0-9][0-9a-zA-Z.!+_-]*)/)
 
   return match?.[1] ?? ''
 }
 
+/**
+ * Parses a Poetry dependency value from string or inline-table syntax.
+ */
 const parsePoetryDep = (name: string, value: unknown, section: string, group: string): ParsedDependency | null => {
   if (name.toLowerCase() === 'python') {
     return null
@@ -71,6 +106,9 @@ const parsePoetryDep = (name: string, value: unknown, section: string, group: st
   }
 }
 
+/**
+ * Parses a uv-compatible dependency string and its version constraint.
+ */
 const parseUVDep = (depString: string, section: string, group: string): ParsedDependency | null => {
   if (depString.trim().startsWith('#')) {
     return null
@@ -106,6 +144,9 @@ const parseUVDep = (depString: string, section: string, group: string): ParsedDe
   }
 }
 
+/**
+ * Detects the lock/sync manager from TOML metadata and nearby lockfiles.
+ */
 export const detectManager = async (parsed: Record<string, unknown>, filePath: string): Promise<PyProjectManager> => {
   const tool = parsed.tool as Record<string, unknown> | undefined
   if (tool?.poetry !== undefined) {
@@ -121,14 +162,23 @@ export const detectManager = async (parsed: Record<string, unknown>, filePath: s
   }
 }
 
+/**
+ * Detects the pyproject dependency format from parsed TOML content.
+ */
 export const detectParsedFormat = (parsed: Record<string, unknown>): PyProjectFormat => {
   const tool = parsed.tool as Record<string, unknown> | undefined
 
   return tool?.poetry !== undefined ? 'poetry' : 'uv'
 }
 
+/**
+ * Backwards-compatible alias for `detectParsedFormat`.
+ */
 export const detectFormat = detectParsedFormat
 
+/**
+ * Extracts all parseable Poetry dependencies from the parsed TOML object.
+ */
 const parsePoetryDependencies = (parsed: Record<string, unknown>): ParsedDependency[] => {
   const dependencies: ParsedDependency[] = []
   const tool = parsed.tool as Record<string, unknown> | undefined
@@ -169,6 +219,9 @@ const parsePoetryDependencies = (parsed: Record<string, unknown>): ParsedDepende
   return dependencies
 }
 
+/**
+ * Extracts all parseable uv dependencies from project and dependency-group sections.
+ */
 const parseUVDependencies = (parsed: Record<string, unknown>): ParsedDependency[] => {
   const dependencies: ParsedDependency[] = []
   const project = parsed.project as Record<string, unknown> | undefined
@@ -220,6 +273,9 @@ const parseUVDependencies = (parsed: Record<string, unknown>): ParsedDependency[
   return dependencies
 }
 
+/**
+ * Reads pyproject.toml, detects its format and manager, and extracts updateable dependencies.
+ */
 export const parsePyProject = async (filePath: string): Promise<PyProjectData> => {
   const absolutePath = path.resolve(filePath)
   const rawContent = await fs.readFile(absolutePath, 'utf-8')

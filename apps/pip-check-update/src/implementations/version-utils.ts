@@ -3,16 +3,30 @@ import { compare, major, valid } from '@renovatebot/pep440'
 import type { PyPIPackageInfo } from './pypi-client.js'
 import type { ParsedDependency, PyProjectFormat } from './pyproject-parser.js'
 
+/**
+ * Update decision and replacement constraint for one dependency.
+ */
 export interface UpdateInfo {
+  /** Parsed dependency from pyproject.toml. */
   dependency: ParsedDependency
+  /** Latest version found on PyPI, or `N/A` when unavailable. */
   latestVersion: string
+  /** Whether this dependency should be rewritten. */
   shouldUpdate: boolean
+  /** Whether the update crosses the major-version boundary. */
   isMajorBump: boolean
+  /** Replacement constraint to write when `shouldUpdate` is true. */
   newConstraint: string
 }
 
+/**
+ * Checks whether a version can be compared by the PEP 440 parser.
+ */
 const isComparableVersion = (version: string): boolean => valid(version) !== null
 
+/**
+ * Determines whether the latest version is a major bump from the current version.
+ */
 const isMajorVersionBump = (current: string, latest: string): boolean => {
   if (!isComparableVersion(current) || !isComparableVersion(latest)) {
     return false
@@ -21,6 +35,9 @@ const isMajorVersionBump = (current: string, latest: string): boolean => {
   return major(latest) > major(current)
 }
 
+/**
+ * Preserves Poetry constraint style while replacing the version.
+ */
 const generatePoetryConstraint = (oldConstraint: string, newVersion: string): string => {
   if (oldConstraint.startsWith('^')) {
     return `^${newVersion}`
@@ -33,6 +50,9 @@ const generatePoetryConstraint = (oldConstraint: string, newVersion: string): st
   return newVersion
 }
 
+/**
+ * Preserves common PEP 508 constraint operators while replacing the version.
+ */
 const generatePEP508Constraint = (oldConstraint: string, newVersion: string): string => {
   if (oldConstraint.includes('~=')) {
     return `~=${newVersion}`
@@ -49,6 +69,9 @@ const generatePEP508Constraint = (oldConstraint: string, newVersion: string): st
   return `>=${newVersion}`
 }
 
+/**
+ * Compares one dependency with PyPI metadata and decides whether to update it.
+ */
 export const analyzeUpdate = (
   dependency: ParsedDependency,
   pypiInfo: PyPIPackageInfo | null,
@@ -113,6 +136,9 @@ export const analyzeUpdate = (
   }
 }
 
+/**
+ * Formats dependency update decisions as a fixed-width CLI table.
+ */
 export const formatUpdateTable = (updates: readonly UpdateInfo[]): string => {
   const lines: string[] = []
 

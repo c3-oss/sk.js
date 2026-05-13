@@ -6,6 +6,9 @@ import type { CLIArgs } from '../dtos/cli-args.dto.js'
 
 const PROGRAM_COMMAND = 'npx pip-check-update'
 
+/**
+ * Raw argument shape produced by ts-command-line-args before normalization.
+ */
 interface RawCLIArgs {
   'pyproject-path': string
   'dry-run': boolean
@@ -14,6 +17,9 @@ interface RawCLIArgs {
   help?: boolean
 }
 
+/**
+ * Parses process arguments into normalized pip-check-update CLI options.
+ */
 export const parseArgs = (): CLIArgs => {
   const raw = parseCli<RawCLIArgs>(
     {
@@ -76,4 +82,7 @@ export const parseArgs = (): CLIArgs => {
   }
 }
 
+/**
+ * Command shown in generated help and error guidance.
+ */
 export const helpCommand = PROGRAM_COMMAND

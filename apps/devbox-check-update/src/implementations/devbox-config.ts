@@ -1,24 +1,46 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
+/**
+ * Object-form package entry from a Devbox configuration.
+ */
 export interface DevboxPackageMapEntry {
+  /** Optional package version or constraint stored by Devbox. */
   version?: string
+  /** Additional Devbox package fields preserved from the source configuration. */
   [key: string]: unknown
 }
 
+/**
+ * Minimal shape of a devbox.json file needed by this package.
+ */
 export interface DevboxConfig {
+  /** Package declarations in either array or object form. */
   packages?: unknown
+  /** Additional Devbox configuration fields. */
   [key: string]: unknown
 }
 
+/**
+ * Resolved Devbox project metadata and parsed configuration.
+ */
 export interface ResolvedDevboxProject {
+  /** Absolute path to the devbox.json file. */
   configPath: string
+  /** Directory containing the resolved devbox.json file. */
   projectDir: string
+  /** Parsed Devbox configuration object. */
   config: DevboxConfig
 }
 
+/**
+ * Normalized package declaration returned from `parseDevboxPackages`.
+ */
 export type DevboxPackageSpec = string | [string, string | DevboxPackageMapEntry]
 
+/**
+ * Resolves a user-supplied Devbox target to the concrete devbox.json path.
+ */
 export const resolveDevboxConfigPath = async (targetPath: string): Promise<string> => {
   const resolvedPath = path.resolve(targetPath)
   const stat = await fs.stat(resolvedPath)
@@ -30,6 +52,9 @@ export const resolveDevboxConfigPath = async (targetPath: string): Promise<strin
   return resolvedPath
 }
 
+/**
+ * Reads and parses JSON while preserving the file path in parse errors.
+ */
 const readJson = async (filePath: string): Promise<unknown> => {
   const content = await fs.readFile(filePath, 'utf-8')
 
@@ -41,6 +66,9 @@ const readJson = async (filePath: string): Promise<unknown> => {
   }
 }
 
+/**
+ * Loads a Devbox project and validates that its package declarations are parseable.
+ */
 export const readDevboxProject = async (targetPath: string): Promise<ResolvedDevboxProject> => {
   const configPath = await resolveDevboxConfigPath(targetPath)
   const config = await readJson(configPath)
@@ -60,6 +88,9 @@ export const readDevboxProject = async (targetPath: string): Promise<ResolvedDev
   return project
 }
 
+/**
+ * Parses the packages field from a Devbox configuration in array or object form.
+ */
 export const parseDevboxPackages = (config: DevboxConfig): DevboxPackageSpec[] => {
   const { packages } = config
 

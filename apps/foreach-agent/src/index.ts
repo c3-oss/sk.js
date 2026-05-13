@@ -1,3 +1,4 @@
+/** Public library exports for foreach-agent. */
 export { main } from './main.js'
 export * from './dtos/types.js'
 export * from './providers/defaults.js'

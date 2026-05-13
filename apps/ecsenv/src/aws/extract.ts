@@ -8,23 +8,41 @@ import { log } from '../logger.js'
 import { collectEnvironmentAndSecretReferences, resolveSecrets } from './secrets.js'
 import { serviceDisplayName } from './services.js'
 
+/**
+ * Options used to extract environment variables from one ECS service.
+ */
 export interface ExtractOptions {
+  /** ECS cluster name or ARN. */
   readonly cluster: string
+  /** ECS service name or ARN. */
   readonly service: string
+  /** AWS region used for ECS and Secrets Manager calls. */
   readonly region: string
+  /** Output file path for the generated shell exports. */
   readonly outputPath: string
 }
 
+/**
+ * Summary of a completed ECS environment extraction.
+ */
 export interface ExtractResult {
+  /** ECS cluster name or ARN used for extraction. */
   readonly cluster: string
+  /** Canonical ECS service name. */
   readonly service: string
+  /** Count of literal environment variables written. */
   readonly envCount: number
+  /** Count of secrets resolved and written. */
   readonly secretCount: number
+  /** Absolute path to the generated shell file. */
   readonly outputPath: string
 }
 
 const VALID_SHELL_IDENTIFIER = /^[a-zA-Z_][a-zA-Z0-9_]*$/
 
+/**
+ * Renders environment values as sorted shell export statements.
+ */
 export const toShellFile = (environment: Record<string, string>): string =>
   Object.entries(environment)
     .filter(([name]) => {
@@ -39,6 +57,9 @@ export const toShellFile = (environment: Record<string, string>): string =>
     .concat('')
     .join('\n')
 
+/**
+ * Extracts environment variables and resolved secrets from an ECS service into a shell file.
+ */
 export const extractEnvironment = async (options: ExtractOptions): Promise<ExtractResult> => {
   const ecsClient = ecs.create({ log, cluster: options.cluster, baseRegion: options.region })
   const describeResult = await ecsClient.describeServicesWithTaskDefs([options.service])

@@ -6,6 +6,9 @@ import { listServices } from '../aws/services.js'
 import { serviceDisplayName } from '../aws/services.js'
 import { selectOption } from '../ui/selection-prompt.js'
 
+/**
+ * Runs the interactive TUI flow for choosing a cluster, choosing a service, and extracting its environment.
+ */
 export const runInteractiveCommand = async (parsed: ParsedArgv): Promise<void> => {
   if (!process.stdin.isTTY || !process.stdout.isTTY) {
     throw new Error('interactive mode requires a TTY. Use CLI commands: clusters, services, extract')

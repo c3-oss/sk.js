@@ -52,12 +52,14 @@ const LIQUID_KEYWORDS = new Set([
   'empty',
 ])
 
+/** Deduplicates template variable names and excludes Liquid syntax keywords. */
 const normalizeVariables = (variables: readonly string[]): readonly string[] =>
   [...new Set(variables)]
     .map((value) => value.trim())
     .filter((value) => value.length > 0 && !LIQUID_KEYWORDS.has(value))
     .sort((a, b) => a.localeCompare(b))
 
+/** Extracts top-level variable names referenced by Liquid output and logic tags. */
 export const extractTemplateVariables = (content: string): readonly string[] => {
   const variables: string[] = []
 
@@ -80,9 +82,11 @@ export const extractTemplateVariables = (content: string): readonly string[] => 
   return normalizeVariables(variables)
 }
 
+/** Renders a Liquid template with strict variable handling. */
 export const renderTemplate = async (template: string, scope: Record<string, unknown>): Promise<string> =>
   engine.parseAndRender(template, scope)
 
+/** Renders a template against every entry and returns validation failures. */
 export const validateTemplateWithEntries = async (
   template: string,
   entries: readonly Record<string, unknown>[],

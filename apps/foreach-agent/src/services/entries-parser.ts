@@ -3,6 +3,7 @@ import path from 'node:path'
 
 import YAML from 'yaml'
 
+/** Validates that parsed entries are an array of plain objects. */
 const ensureEntries = (value: unknown): readonly Record<string, unknown>[] => {
   if (Array.isArray(value)) {
     const entries = value.filter(
@@ -23,6 +24,7 @@ const ensureEntries = (value: unknown): readonly Record<string, unknown>[] => {
   throw new Error('input must be an array of objects or an object with `entries` array')
 }
 
+/** Parses JSON first, then YAML, and returns normalized entry objects. */
 const parseInput = (raw: string): readonly Record<string, unknown>[] => {
   const trimmed = raw.trim()
   if (trimmed.length === 0) {
@@ -41,8 +43,10 @@ const parseInput = (raw: string): readonly Record<string, unknown>[] => {
   }
 }
 
+/** Parses inline JSON or YAML entries text for a headless or TUI run. */
 export const parseEntriesFromText = (raw: string): readonly Record<string, unknown>[] => parseInput(raw)
 
+/** Reads and parses entries from an absolute JSON or YAML file path. */
 export const parseEntriesFromAbsolutePath = async (
   absolutePath: string,
 ): Promise<readonly Record<string, unknown>[]> => {

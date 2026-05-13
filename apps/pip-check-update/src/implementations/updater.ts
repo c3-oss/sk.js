@@ -5,8 +5,14 @@ import path from 'node:path'
 import type { PyProjectData, PyProjectManager } from './pyproject-parser.js'
 import type { UpdateInfo } from './version-utils.js'
 
+/**
+ * Escapes text for exact use inside a regular expression.
+ */
 const escapeRegex = (value: string): string => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
+/**
+ * Applies selected dependency updates to the source pyproject.toml file.
+ */
 export const updatePyProjectFile = async (
   pyproject: PyProjectData,
   updates: readonly UpdateInfo[],
@@ -45,6 +51,9 @@ export const updatePyProjectFile = async (
   return updatesToApply.length
 }
 
+/**
+ * Runs a package-manager command and captures stdout and failure text.
+ */
 const collectOutput = (
   command: string,
   args: readonly string[],
@@ -71,6 +80,9 @@ const collectOutput = (
     })
   })
 
+/**
+ * Runs the lock or sync command matching the detected Python package manager.
+ */
 export const runSyncCommand = async (
   filePath: string,
   manager: PyProjectManager,

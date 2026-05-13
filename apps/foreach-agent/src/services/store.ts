@@ -6,6 +6,7 @@ import type { RunRecord, RunSummary, TaskRecord, TemplateFile } from '../dtos/ty
 import { toCsv } from '../utils/csv.js'
 import { EXPORTS_DIR, FOREACH_AGENT_HOME, RUNS_DIR, TEMPLATES_DIR, toSafeFileName } from '../utils/path.js'
 
+/** Extracts a Node filesystem error code when one is present. */
 const getFsErrorCode = (errorValue: unknown): string | undefined => {
   if (errorValue !== null && typeof errorValue === 'object' && 'code' in errorValue) {
     const code = (errorValue as { code?: unknown }).code
@@ -16,12 +17,14 @@ const getFsErrorCode = (errorValue: unknown): string | undefined => {
   return undefined
 }
 
+/** Rejects ids that would escape the managed storage directories. */
 const assertFileNameOnly = (value: string, label: string): void => {
   if (value.includes('/') || value.includes('\\')) {
     throw new Error(`${label} must be a file name, not a path`)
   }
 }
 
+/** Creates the foreach-agent home, template, run, and export directories. */
 export const ensureStorage = async (): Promise<void> => {
   await fs.mkdir(FOREACH_AGENT_HOME, { recursive: true })
   await fs.mkdir(TEMPLATES_DIR, { recursive: true })
@@ -29,6 +32,7 @@ export const ensureStorage = async (): Promise<void> => {
   await fs.mkdir(EXPORTS_DIR, { recursive: true })
 }
 
+/** Lists stored templates ordered by most recent modification time. */
 export const listTemplates = async (): Promise<readonly TemplateFile[]> => {
   await ensureStorage()
   const entries = await fs.readdir(TEMPLATES_DIR, { withFileTypes: true })
@@ -53,6 +57,7 @@ export const listTemplates = async (): Promise<readonly TemplateFile[]> => {
   return files.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt))
 }
 
+/** Creates a new Liquid template file with a safe filename. */
 export const createTemplate = async (name: string, content: string): Promise<TemplateFile> => {
   await ensureStorage()
   const safeName = toSafeFileName(name)
@@ -78,6 +83,7 @@ export const createTemplate = async (name: string, content: string): Promise<Tem
   }
 }
 
+/** Replaces the content of an existing stored template. */
 export const updateTemplate = async (id: string, content: string): Promise<TemplateFile> => {
   assertFileNameOnly(id, 'template id')
   await ensureStorage()
@@ -94,6 +100,7 @@ export const updateTemplate = async (id: string, content: string): Promise<Templ
   }
 }
 
+/** Removes a stored template by id. */
 export const deleteTemplate = async (id: string): Promise<void> => {
   assertFileNameOnly(id, 'template id')
   await ensureStorage()
@@ -101,12 +108,17 @@ export const deleteTemplate = async (id: string): Promise<void> => {
   await fs.rm(filePath, { force: true })
 }
 
+/** Directory paths allocated for one run. */
 export interface RunPaths {
+  /** Run root directory. */
   readonly runDir: string
+  /** Directory for rendered prompt files. */
   readonly promptsDir: string
+  /** Directory for raw JSONL transcripts. */
   readonly transcriptsDir: string
 }
 
+/** Creates the directory layout for a run and returns the chosen run id. */
 export const createRunPaths = async (runId?: string): Promise<RunPaths & { readonly runId: string }> => {
   await ensureStorage()
   const safeRunId = runId ?? randomUUID()
@@ -120,12 +132,14 @@ export const createRunPaths = async (runId?: string): Promise<RunPaths & { reado
   return { runId: safeRunId, runDir, promptsDir, transcriptsDir }
 }
 
+/** Persists the current run snapshot as run.json. */
 export const saveRunRecord = async (run: RunRecord): Promise<void> => {
   const runDir = path.join(RUNS_DIR, run.id)
   await fs.mkdir(runDir, { recursive: true })
   await fs.writeFile(path.join(runDir, 'run.json'), JSON.stringify(run, null, 2), 'utf-8')
 }
 
+/** Loads a run snapshot, returning null when it is missing or invalid JSON. */
 export const loadRunRecord = async (runId: string): Promise<RunRecord | null> => {
   const runPath = path.join(RUNS_DIR, runId, 'run.json')
   const content = await fs.readFile(runPath, 'utf-8').catch(() => null)
@@ -140,6 +154,7 @@ export const loadRunRecord = async (runId: string): Promise<RunRecord | null> =>
   }
 }
 
+/** Lists stored run records ordered by creation time descending. */
 export const listRunRecords = async (): Promise<readonly RunRecord[]> => {
   await ensureStorage()
   const entries = await fs.readdir(RUNS_DIR, { withFileTypes: true })
@@ -151,6 +166,7 @@ export const listRunRecords = async (): Promise<readonly RunRecord[]> => {
   return runs.filter((run): run is RunRecord => run !== null).sort((a, b) => b.createdAt.localeCompare(a.createdAt))
 }
 
+/** Builds a compact summary row for run history. */
 const summarizeRun = (run: RunRecord): RunSummary => {
   const successTasks = run.tasks.filter((task) => task.status === 'success').length
   const failedTasks = run.tasks.filter((task) => task.status === 'failed' || task.status === 'timeout').length
@@ -167,20 +183,24 @@ const summarizeRun = (run: RunRecord): RunSummary => {
   }
 }
 
+/** Lists compact run summaries ordered by creation time descending. */
 export const listRuns = async (): Promise<readonly RunSummary[]> => {
   const runs = await listRunRecords()
   return runs.map(summarizeRun)
 }
 
+/** Saves one rendered task prompt and returns its absolute path. */
 export const savePromptFile = async (runId: string, taskId: string, prompt: string): Promise<string> => {
   const filePath = path.join(RUNS_DIR, runId, 'prompts', `${taskId}.md`)
   await fs.writeFile(filePath, prompt, 'utf-8')
   return filePath
 }
 
+/** Returns the transcript path for a task in a run. */
 export const buildTranscriptPath = (runId: string, taskId: string): string =>
   path.join(RUNS_DIR, runId, 'transcripts', `${taskId}.jsonl`)
 
+/** Maps a task to a flat CSV export row. */
 const toTaskExportRow = (task: TaskRecord): Record<string, string> => ({
   taskId: task.id,
   entryIndex: String(task.entryIndex),
@@ -199,6 +219,7 @@ const toTaskExportRow = (task: TaskRecord): Record<string, string> => ({
   errorMessage: task.errorMessage ?? '',
 })
 
+/** Writes a run export as either the full JSON record or task-level CSV rows. */
 export const exportRun = async (run: RunRecord, format: 'json' | 'csv', outputPath: string): Promise<void> => {
   if (format === 'json') {
     await fs.writeFile(outputPath, JSON.stringify(run, null, 2), 'utf-8')

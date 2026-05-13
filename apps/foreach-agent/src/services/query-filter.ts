@@ -1,7 +1,9 @@
 import { compileExpression } from 'filtrex'
 
+/** Predicate produced from a Filtrex expression. */
 type QueryPredicate<TContext extends Record<string, unknown>> = (context: TContext) => unknown
 
+/** Collapses multi-line query text into the expression passed to Filtrex. */
 const normalizeQuery = (query: string): string =>
   query
     .split('\n')
@@ -9,6 +11,7 @@ const normalizeQuery = (query: string): string =>
     .join(' ')
     .trim()
 
+/** Applies CLI query truthiness rules to Filtrex results. */
 const isTruthyQueryResult = (value: unknown): boolean => {
   if (typeof value === 'boolean') {
     return value
@@ -25,6 +28,7 @@ const isTruthyQueryResult = (value: unknown): boolean => {
   return value !== null && value !== undefined
 }
 
+/** Compiles a query and wraps parser failures with CLI-friendly context. */
 const compileQueryPredicate = <TContext extends Record<string, unknown>>(query: string): QueryPredicate<TContext> => {
   try {
     return compileExpression(query) as QueryPredicate<TContext>
@@ -34,6 +38,7 @@ const compileQueryPredicate = <TContext extends Record<string, unknown>>(query: 
   }
 }
 
+/** Filters items by evaluating a Filtrex query against each mapped context. */
 export const filterWithQuery = <TContext extends Record<string, unknown>, TItem>(
   items: readonly TItem[],
   query: string,

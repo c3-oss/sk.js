@@ -1,5 +1,7 @@
+/** Returns the current time as an ISO timestamp. */
 export const nowIso = (): string => new Date().toISOString()
 
+/** Calculates elapsed milliseconds between two ISO timestamps. */
 export const durationMs = (startIso?: string, endIso?: string): number | undefined => {
   if (startIso === undefined || endIso === undefined) {
     return undefined
@@ -14,6 +16,7 @@ export const durationMs = (startIso?: string, endIso?: string): number | undefin
   return Math.max(0, end - start)
 }
 
+/** Formats a millisecond duration for compact terminal display. */
 export const formatDuration = (valueMs?: number): string => {
   if (valueMs === undefined) {
     return '-'

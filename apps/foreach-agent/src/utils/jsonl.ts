@@ -1,10 +1,12 @@
 import fs from 'node:fs/promises'
 
+/** Appends one JSON-encoded payload line to a JSONL file. */
 export const appendJsonLine = async (filePath: string, payload: unknown): Promise<void> => {
   const line = `${JSON.stringify(payload)}\n`
   await fs.appendFile(filePath, line, 'utf-8')
 }
 
+/** Reads a JSONL file and skips malformed or blank lines. */
 export const readJsonLines = async <T>(filePath: string): Promise<readonly T[]> => {
   const content = await fs.readFile(filePath, 'utf-8').catch(() => '')
   const lines = content

@@ -16,6 +16,11 @@ import { flow } from './implementations/misc.js'
 
 /* ---------------------------------------------------------------------------------------------- */
 
+/**
+ * Parses CLI arguments and delegates parse failures to the CLI error handler.
+ *
+ * @returns Parsed FIM command options.
+ */
 const tryParsingArgs = (): FIMArgs => {
   try {
     return cli.parse()
@@ -24,6 +29,9 @@ const tryParsingArgs = (): FIMArgs => {
   }
 }
 
+/**
+ * Runs the FIM CLI command for listing fonts, rendering one banner, or showcasing all fonts.
+ */
 const main = () => {
   const { text, font, list, style, indent, showcase } = tryParsingArgs()
 

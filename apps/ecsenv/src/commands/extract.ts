@@ -2,6 +2,9 @@ import type { ParsedArgv } from '../argv.js'
 import { getLastFlagValue, getRegion, requireFlag } from '../argv.js'
 import { extractEnvironment } from '../aws/extract.js'
 
+/**
+ * Runs the `extract` command and writes ECS environment values to a shell file.
+ */
 export const runExtractCommand = async (parsed: ParsedArgv): Promise<void> => {
   const cluster = requireFlag(parsed, 'cluster')
   const service = requireFlag(parsed, 'service')

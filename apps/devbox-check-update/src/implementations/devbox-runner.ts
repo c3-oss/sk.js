@@ -2,21 +2,39 @@ import { spawn } from 'node:child_process'
 
 import type { DevboxCheckUpdateArgs } from './cli-args.js'
 
+/**
+ * Captured stdout and optional failure text from a subprocess.
+ */
 export interface CommandResult {
+  /** Standard output emitted by the command. */
   output: string
+  /** Error message or stderr output when the command fails. */
   error?: string
 }
 
+/**
+ * Normalized options used to invoke `devbox update`.
+ */
 export interface DevboxUpdateOptions {
+  /** Directory containing the target Devbox project. */
   projectDir: string
+  /** Optional package names to update. */
   packages: readonly string[]
+  /** Whether Devbox may install packages after updating metadata. */
   install: boolean
+  /** Whether to update all Devbox projects. */
   allProjects: boolean
+  /** Whether to synchronize the lockfile. */
   syncLock: boolean
+  /** Optional Devbox environment name. */
   environment?: string
+  /** Whether to suppress Devbox output. */
   quiet: boolean
 }
 
+/**
+ * Builds the argument vector passed to `devbox update`.
+ */
 export const buildDevboxUpdateArgs = (options: DevboxUpdateOptions): string[] => {
   const args = ['update', '--config', options.projectDir]
 
@@ -45,6 +63,9 @@ export const buildDevboxUpdateArgs = (options: DevboxUpdateOptions): string[] =>
   return args
 }
 
+/**
+ * Converts parsed CLI arguments into runner options for a resolved project directory.
+ */
 export const toDevboxUpdateOptions = (args: DevboxCheckUpdateArgs, projectDir: string): DevboxUpdateOptions => ({
   projectDir,
   packages: args.packages,
@@ -55,6 +76,9 @@ export const toDevboxUpdateOptions = (args: DevboxCheckUpdateArgs, projectDir: s
   quiet: args.quiet,
 })
 
+/**
+ * Runs a command in a working directory and captures stdout and failure text.
+ */
 export const runCommand = (command: string, args: readonly string[], cwd: string): Promise<CommandResult> =>
   new Promise((resolve) => {
     const childProcess = spawn(command, args, { cwd })
@@ -77,6 +101,9 @@ export const runCommand = (command: string, args: readonly string[], cwd: string
     })
   })
 
+/**
+ * Executes `devbox update` with normalized options.
+ */
 export const runDevboxUpdate = async (options: DevboxUpdateOptions): Promise<CommandResult> => {
   const args = buildDevboxUpdateArgs(options)
 

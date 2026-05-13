@@ -22,6 +22,9 @@ const bye = (message?: string): never => {
   process.exit(0)
 }
 
+/**
+ * Runs the devbox-check-update CLI using process arguments and exits after completing the requested update mode.
+ */
 export const main = async (): Promise<void> => {
   const args = parseArgs()
 

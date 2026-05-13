@@ -4,12 +4,18 @@ import { listServices } from '../aws/services.js'
 import type { ServiceRecord } from '../aws/services.js'
 import { parseListOutputFormat, printRows } from '../table.js'
 
+/**
+ * Converts service records into table-friendly row objects.
+ */
 const toServicesRows = (services: readonly ServiceRecord[]): readonly Record<string, unknown>[] =>
   services.map((service) => ({
     name: service.name,
     arn: service.arn,
   }))
 
+/**
+ * Runs the `services` command and prints ECS services as table or JSON.
+ */
 export const runServicesCommand = async (parsed: ParsedArgv): Promise<void> => {
   const cluster = requireFlag(parsed, 'cluster')
   const region = getRegion(parsed)

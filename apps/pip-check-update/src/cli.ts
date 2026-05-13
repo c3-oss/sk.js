@@ -28,6 +28,9 @@ const bye = (message?: string): never => {
   process.exit(0)
 }
 
+/**
+ * Runs the pip-check-update CLI using process arguments and exits when the update workflow finishes.
+ */
 export const main = async (): Promise<void> => {
   const { pyprojectPath, dryRun, skipLockSync, breakMajor } = parseArgs()
 

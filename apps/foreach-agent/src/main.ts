@@ -21,11 +21,15 @@ import App from './tui/App.js'
 import type { AppScreen } from './tui/App.js'
 import { toCsv } from './utils/csv.js'
 
+/** Supported CLI output modes. */
 export type OutputFormat = 'interactive' | 'table' | 'json' | 'csv'
 type NonInteractiveOutputFormat = Exclude<OutputFormat, 'interactive'>
 
+/** Parsed command-line arguments split into positionals and repeated flags. */
 interface ParsedArgv {
+  /** Positional tokens after option parsing. */
   readonly positionals: readonly string[]
+  /** Flag values keyed by flag name, preserving repeated values. */
   readonly flags: ReadonlyMap<string, readonly string[]>
 }
 
@@ -84,6 +88,7 @@ Query fields:
   configs: runId, runStatus, templateName, templateId, providerCount, providers, entryCount, concurrency,
            retries, timeoutSeconds, autoApproval, cwd, createdAt`
 
+/** Parses long flags, short help, repeated options, and positional arguments. */
 export const parseArgv = (argv: readonly string[]): ParsedArgv => {
   const positionals: string[] = []
   const flags = new Map<string, string[]>()
@@ -153,12 +158,16 @@ export const parseArgv = (argv: readonly string[]): ParsedArgv => {
   return { positionals, flags }
 }
 
+/** Checks whether a parsed flag was supplied at least once. */
 const hasFlag = (parsed: ParsedArgv, name: string): boolean => parsed.flags.has(name)
 
+/** Returns every value supplied for a parsed flag. */
 const getFlagValues = (parsed: ParsedArgv, name: string): readonly string[] => parsed.flags.get(name) ?? []
 
+/** Returns the last value supplied for a parsed flag. */
 const getLastFlagValue = (parsed: ParsedArgv, name: string): string | undefined => getFlagValues(parsed, name).at(-1)
 
+/** Parses CLI boolean values from common textual forms. */
 const parseBoolean = (value: string, fieldName: string): boolean => {
   const normalized = value.trim().toLowerCase()
   if (['true', '1', 'yes', 'on'].includes(normalized)) {
@@ -170,6 +179,7 @@ const parseBoolean = (value: string, fieldName: string): boolean => {
   throw new Error(`invalid ${fieldName} "${value}". Use true or false`)
 }
 
+/** Parses an integer CLI option with a field-specific error message. */
 const parseIntField = (value: string, fieldName: string): number => {
   const parsed = Number.parseInt(value, 10)
   if (!Number.isInteger(parsed)) {
@@ -178,11 +188,15 @@ const parseIntField = (value: string, fieldName: string): number => {
   return parsed
 }
 
+/** Options that control output format parsing. */
 interface OutputFormatOptions {
+  /** Format used when the flag is omitted. */
   readonly defaultValue?: OutputFormat
+  /** Whether interactive output is valid for this command. */
   readonly allowInteractive?: boolean
 }
 
+/** Parses and validates the output format requested by a CLI command. */
 export const parseOutputFormat = (rawValue: string | undefined, options: OutputFormatOptions = {}): OutputFormat => {
   const defaultValue = options.defaultValue ?? 'interactive'
   const allowInteractive = options.allowInteractive ?? true
@@ -202,6 +216,7 @@ export const parseOutputFormat = (rawValue: string | undefined, options: OutputF
   throw new Error(`invalid --output-format value "${rawValue}". Use: interactive, table, json, csv`)
 }
 
+/** Converts values to terminal/table-safe cell strings. */
 const stringifyCell = (value: unknown): string => {
   if (value === null || value === undefined) {
     return ''
@@ -218,6 +233,7 @@ const stringifyCell = (value: unknown): string => {
   return JSON.stringify(value)
 }
 
+/** Converts arbitrary row values into strings for CSV output. */
 const toStringRows = (rows: readonly Record<string, unknown>[]): readonly Record<string, string>[] =>
   rows.map(
     (row) =>
@@ -227,6 +243,7 @@ const toStringRows = (rows: readonly Record<string, unknown>[]): readonly Record
       >,
   )
 
+/** Renders rows as a fixed-width terminal table. */
 const renderTable = (rows: readonly Record<string, unknown>[]): string => {
   if (rows.length === 0) {
     return 'No results'
@@ -247,6 +264,7 @@ const renderTable = (rows: readonly Record<string, unknown>[]): string => {
   return [header, separator, ...data].join('\n')
 }
 
+/** Prints rows in table, JSON, or CSV format. */
 const printRows = (
   rows: readonly Record<string, unknown>[],
   format: NonInteractiveOutputFormat,
@@ -265,6 +283,7 @@ const printRows = (
   console.log(renderTable(rows))
 }
 
+/** Maps task records to the default CLI task table shape. */
 const getTaskRows = (tasks: readonly TaskRecord[]): readonly Record<string, unknown>[] =>
   tasks.map((task) => ({
     id: task.id,
@@ -279,6 +298,7 @@ const getTaskRows = (tasks: readonly TaskRecord[]): readonly Record<string, unkn
     errorMessage: task.errorMessage ?? '',
   }))
 
+/** Computes reusable task counts and unique providers for a run. */
 const getRunMetrics = (run: RunRecord) => {
   const providers = [...new Set(run.config.providers.map((providerConfig) => providerConfig.provider))]
   const successTasks = run.tasks.filter((task) => task.status === 'success').length
@@ -295,6 +315,7 @@ const getRunMetrics = (run: RunRecord) => {
   }
 }
 
+/** Maps a run record to the default CLI runs table shape. */
 const toRunRow = (run: RunRecord): Record<string, unknown> => {
   const metrics = getRunMetrics(run)
   return {
@@ -313,6 +334,7 @@ const toRunRow = (run: RunRecord): Record<string, unknown> => {
   }
 }
 
+/** Builds the query context exposed to run-list Filtrex expressions. */
 const toRunQueryContext = (run: RunRecord): Record<string, unknown> => {
   const metrics = getRunMetrics(run)
   return {
@@ -340,6 +362,7 @@ const toRunQueryContext = (run: RunRecord): Record<string, unknown> => {
   }
 }
 
+/** Builds the query context exposed to task-list Filtrex expressions. */
 const toTaskQueryContext = (run: RunRecord, task: TaskRecord): Record<string, unknown> => ({
   id: task.id,
   runId: run.id,
@@ -361,6 +384,7 @@ const toTaskQueryContext = (run: RunRecord, task: TaskRecord): Record<string, un
   cwd: run.config.cwd,
 })
 
+/** Builds the query context exposed to template-list Filtrex expressions. */
 const toTemplateQueryContext = (template: TemplateFile): Record<string, unknown> => ({
   id: template.id,
   name: template.name,
@@ -372,6 +396,7 @@ const toTemplateQueryContext = (template: TemplateFile): Record<string, unknown>
   variablesCount: extractTemplateVariables(template.content).length,
 })
 
+/** Maps a template to the default CLI template table shape. */
 const toTemplateRow = (template: TemplateFile): Record<string, unknown> => ({
   id: template.id,
   updatedAt: template.updatedAt,
@@ -379,6 +404,7 @@ const toTemplateRow = (template: TemplateFile): Record<string, unknown> => ({
   contentLength: template.content.length,
 })
 
+/** Builds the query context exposed to config-list Filtrex expressions. */
 const toConfigQueryContext = (run: RunRecord): Record<string, unknown> => {
   const providers = [...new Set(run.config.providers.map((providerConfig) => providerConfig.provider))]
   return {
@@ -398,6 +424,7 @@ const toConfigQueryContext = (run: RunRecord): Record<string, unknown> => {
   }
 }
 
+/** Maps a run config to the default CLI configs table shape. */
 const toConfigRow = (run: RunRecord): Record<string, unknown> => {
   const context = toConfigQueryContext(run)
   return {
@@ -414,6 +441,7 @@ const toConfigRow = (run: RunRecord): Record<string, unknown> => {
   }
 }
 
+/** Reads all available stdin text. */
 const readStdin = async (): Promise<string> =>
   new Promise((resolve, reject) => {
     let buffer = ''
@@ -429,6 +457,7 @@ const readStdin = async (): Promise<string> =>
     })
   })
 
+/** Resolves text input from inline, path, or stdin flags. */
 const readTextInput = async (
   parsed: ParsedArgv,
   options: {
@@ -472,12 +501,14 @@ const readTextInput = async (
   return undefined
 }
 
+/** Ensures query filtering is only used with non-interactive output. */
 const assertQueryAllowed = (query: string, format: OutputFormat): void => {
   if (format === 'interactive' && query.trim().length > 0) {
     throw new Error('query requires non-interactive output-format (table, json or csv)')
   }
 }
 
+/** Executes a non-interactive run command and prints its task results. */
 const runHeadlessCommand = async (parsed: ParsedArgv): Promise<void> => {
   const format = parseOutputFormat(getLastFlagValue(parsed, 'output-format'), {
     defaultValue: 'table',
@@ -568,6 +599,7 @@ const runHeadlessCommand = async (parsed: ParsedArgv): Promise<void> => {
   })
 }
 
+/** Starts the Ink TUI and waits for it to exit. */
 const runTui = async (
   options: { readonly initialScreen?: AppScreen; readonly initialRunId?: string } = {},
 ): Promise<void> => {
@@ -575,6 +607,7 @@ const runTui = async (
   await waitUntilExit()
 }
 
+/** Lists templates or opens the templates screen. */
 const runTemplatesListCommand = async (parsed: ParsedArgv): Promise<void> => {
   const format = parseOutputFormat(getLastFlagValue(parsed, 'output-format'), { defaultValue: 'interactive' })
   const query = getLastFlagValue(parsed, 'query') ?? ''
@@ -597,6 +630,7 @@ const runTemplatesListCommand = async (parsed: ParsedArgv): Promise<void> => {
   })
 }
 
+/** Reads one template and prints its metadata and content. */
 const runTemplatesReadCommand = async (parsed: ParsedArgv): Promise<void> => {
   const format = parseOutputFormat(getLastFlagValue(parsed, 'output-format'), {
     defaultValue: 'table',
@@ -625,6 +659,7 @@ const runTemplatesReadCommand = async (parsed: ParsedArgv): Promise<void> => {
   printRows([row], format, { template })
 }
 
+/** Creates a template from inline, file, or stdin content. */
 const runTemplatesCreateCommand = async (parsed: ParsedArgv): Promise<void> => {
   const format = parseOutputFormat(getLastFlagValue(parsed, 'output-format'), {
     defaultValue: 'table',
@@ -653,6 +688,7 @@ const runTemplatesCreateCommand = async (parsed: ParsedArgv): Promise<void> => {
   printRows([row], format, { template: created, action: 'created' })
 }
 
+/** Updates a template from inline, file, or stdin content. */
 const runTemplatesUpdateCommand = async (parsed: ParsedArgv): Promise<void> => {
   const format = parseOutputFormat(getLastFlagValue(parsed, 'output-format'), {
     defaultValue: 'table',
@@ -681,6 +717,7 @@ const runTemplatesUpdateCommand = async (parsed: ParsedArgv): Promise<void> => {
   printRows([row], format, { template: updated, action: 'updated' })
 }
 
+/** Deletes a stored template by id. */
 const runTemplatesDeleteCommand = async (parsed: ParsedArgv): Promise<void> => {
   const format = parseOutputFormat(getLastFlagValue(parsed, 'output-format'), {
     defaultValue: 'table',
@@ -696,6 +733,7 @@ const runTemplatesDeleteCommand = async (parsed: ParsedArgv): Promise<void> => {
   printRows([row], format, { id, action: 'deleted' })
 }
 
+/** Dispatches template subcommands. */
 const runTemplatesCommand = async (parsed: ParsedArgv): Promise<void> => {
   const subcommand = parsed.positionals[1] ?? 'list'
 
@@ -723,6 +761,7 @@ const runTemplatesCommand = async (parsed: ParsedArgv): Promise<void> => {
   throw new Error(`unknown templates subcommand "${subcommand}". Use: list, create, read, update, delete`)
 }
 
+/** Lists run history or opens the run-history screen. */
 const runRunsCommand = async (parsed: ParsedArgv): Promise<void> => {
   const format = parseOutputFormat(getLastFlagValue(parsed, 'output-format'), { defaultValue: 'interactive' })
   const query = getLastFlagValue(parsed, 'query') ?? ''
@@ -745,6 +784,7 @@ const runRunsCommand = async (parsed: ParsedArgv): Promise<void> => {
   })
 }
 
+/** Lists tasks for a run or opens the monitor screen. */
 const runTasksCommand = async (parsed: ParsedArgv): Promise<void> => {
   const format = parseOutputFormat(getLastFlagValue(parsed, 'output-format'), { defaultValue: 'interactive' })
   const query = getLastFlagValue(parsed, 'query') ?? ''
@@ -784,6 +824,7 @@ const runTasksCommand = async (parsed: ParsedArgv): Promise<void> => {
   })
 }
 
+/** Lists persisted run configs for inspection and filtering. */
 const runConfigsCommand = async (parsed: ParsedArgv): Promise<void> => {
   const format = parseOutputFormat(getLastFlagValue(parsed, 'output-format'), { defaultValue: 'interactive' })
   const query = getLastFlagValue(parsed, 'query') ?? ''
@@ -818,6 +859,7 @@ const runConfigsCommand = async (parsed: ParsedArgv): Promise<void> => {
   })
 }
 
+/** Exports a stored run record to JSON or task-level CSV. */
 const runExportCommand = async (parsed: ParsedArgv): Promise<void> => {
   const commandPositionals = parsed.positionals.slice(1)
   const runId = getLastFlagValue(parsed, 'run-id') ?? commandPositionals[0]
@@ -844,6 +886,7 @@ const runExportCommand = async (parsed: ParsedArgv): Promise<void> => {
   console.log(`exported run ${run.id} to ${outputPath}`)
 }
 
+/** Main command dispatcher for the foreach-agent CLI. */
 export const main = async (argv: readonly string[] = process.argv.slice(2)): Promise<void> => {
   const parsed = parseArgv(argv)
   const command = parsed.positionals[0] ?? 'tui'

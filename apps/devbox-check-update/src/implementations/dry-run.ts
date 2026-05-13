@@ -5,14 +5,26 @@ import path from 'node:path'
 import type { DevboxUpdateOptions } from './devbox-runner.js'
 import { runDevboxUpdate } from './devbox-runner.js'
 
+/**
+ * Result of a dry-run Devbox update against a temporary project copy.
+ */
 export interface DryRunResult {
+  /** Devbox files whose contents differ after the simulated update. */
   changedFiles: string[]
+  /** Standard output emitted by the update runner. */
   output: string
+  /** Optional error emitted by the update runner. */
   error?: string
 }
 
+/**
+ * Injectable update runner used by dry-run tests and production execution.
+ */
 export type DryRunUpdateRunner = (options: DevboxUpdateOptions) => Promise<{ output: string; error?: string }>
 
+/**
+ * Reads a file if it exists, returning undefined for missing files.
+ */
 const optionalRead = async (filePath: string): Promise<string | undefined> => {
   try {
     return await fs.readFile(filePath, 'utf-8')
@@ -25,6 +37,9 @@ const optionalRead = async (filePath: string): Promise<string | undefined> => {
   }
 }
 
+/**
+ * Copies a file when present and ignores missing optional Devbox files.
+ */
 const optionalCopy = async (source: string, destination: string): Promise<void> => {
   try {
     await fs.copyFile(source, destination)
@@ -37,6 +52,9 @@ const optionalCopy = async (source: string, destination: string): Promise<void> 
   }
 }
 
+/**
+ * Compares the Devbox configuration and lockfile between two project directories.
+ */
 export const diffDevboxFiles = async (beforeDir: string, afterDir: string): Promise<string[]> => {
   const changedFiles: string[] = []
 
@@ -52,6 +70,9 @@ export const diffDevboxFiles = async (beforeDir: string, afterDir: string): Prom
   return changedFiles
 }
 
+/**
+ * Runs a Devbox update in a temporary copy and reports which Devbox files would change.
+ */
 export const runDryDevboxUpdate = async (
   sourceProjectDir: string,
   options: DevboxUpdateOptions,

@@ -2,11 +2,19 @@ import { Box, Text, render, useInput } from 'ink'
 import type { ReactElement } from 'react'
 import { useMemo, useState } from 'react'
 
+/**
+ * Selectable value shown by the Ink prompt.
+ */
 export interface SelectOption {
+  /** Value returned when the option is selected. */
   readonly value: string
+  /** Label displayed in the prompt. */
   readonly label: string
 }
 
+/**
+ * Props used by the internal Ink selection prompt component.
+ */
 interface SelectionPromptProps {
   readonly title: string
   readonly options: readonly SelectOption[]
@@ -16,6 +24,9 @@ interface SelectionPromptProps {
 
 const MAX_VISIBLE_ITEMS = 15
 
+/**
+ * Ink component that renders a searchable single-select prompt.
+ */
 const SelectionPrompt = ({ title, options, onSelect, onCancel }: SelectionPromptProps): ReactElement => {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [search, setSearch] = useState('')
@@ -109,6 +120,9 @@ const SelectionPrompt = ({ title, options, onSelect, onCancel }: SelectionPrompt
   )
 }
 
+/**
+ * Opens an interactive searchable prompt and resolves with the selected option value.
+ */
 export const selectOption = async (title: string, options: readonly SelectOption[]): Promise<string | undefined> => {
   if (options.length === 0) {
     return undefined

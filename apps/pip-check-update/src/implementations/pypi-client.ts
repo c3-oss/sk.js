@@ -1,9 +1,18 @@
+/**
+ * Package metadata fetched from the PyPI JSON API.
+ */
 export interface PyPIPackageInfo {
+  /** Canonical package name returned by PyPI. */
   name: string
+  /** Latest version reported by PyPI. */
   latestVersion: string
+  /** All release versions present in the package metadata. */
   releases: string[]
 }
 
+/**
+ * Subset of the PyPI JSON response used by this package.
+ */
 interface PyPIResponse {
   info: {
     name: string
@@ -12,6 +21,9 @@ interface PyPIResponse {
   releases: Record<string, unknown[]>
 }
 
+/**
+ * Fetches package metadata for a single package name from PyPI.
+ */
 export const fetchPackageInfo = async (packageName: string): Promise<PyPIPackageInfo | null> => {
   const url = `https://pypi.org/pypi/${packageName}/json`
   const response = await fetch(url)
@@ -33,6 +45,9 @@ export const fetchPackageInfo = async (packageName: string): Promise<PyPIPackage
   }
 }
 
+/**
+ * Fetches multiple PyPI packages in fixed-size batches and maps failures to null results.
+ */
 export const fetchMultiplePackages = async (
   packageNames: readonly string[],
   concurrency = 5,

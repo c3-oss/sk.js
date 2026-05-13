@@ -5,4 +5,7 @@ LoggerBuilder.init({
   logLevel: 'info',
 })
 
+/**
+ * Shared ecsenv logger configured for CLI output.
+ */
 export const log: Logger = LoggerBuilder.getLogger()

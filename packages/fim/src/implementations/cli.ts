@@ -12,6 +12,11 @@ import { errorWrapper } from './misc.js'
 
 const PROGRAM_COMMAND = 'npx fim'
 
+/**
+ * Parses CLI arguments into FIM options and configures the generated help text.
+ *
+ * @returns The parsed command-line options.
+ */
 const parse = (): FIMArgs =>
   parseCli<FIMArgs>(
     {
@@ -79,6 +84,11 @@ const parse = (): FIMArgs =>
     },
   )
 
+/**
+ * Prints an error message and exits with a failure status.
+ *
+ * @param e - Error-like value to display to the user.
+ */
 const die = (e: unknown): never => {
   const { message } = errorWrapper(typeof e === 'string' ? new Error(e) : e)
 
@@ -87,6 +97,11 @@ const die = (e: unknown): never => {
   process.exit(1)
 }
 
+/**
+ * Prints an optional message and exits successfully.
+ *
+ * @param message - Optional text to write to stdout before exiting.
+ */
 const bye = (message?: string): never => {
   if (message !== undefined) {
     console.log(message)

@@ -26,6 +26,9 @@ Examples:
   ecsenv services --cluster MZ-ECS-STG-01 --output-format json
   ecsenv extract --cluster MZ-ECS-STG-01 --service api --output .env.sh`
 
+/**
+ * Resolves the command to run from positional arguments and implicit extract flags.
+ */
 const resolveCommand = (parsed: ParsedArgv): CommandName => {
   const implicitExtract = parsed.positionals.length === 0 && hasFlag(parsed, 'cluster') && hasFlag(parsed, 'service')
   if (implicitExtract) {
@@ -39,6 +42,9 @@ const resolveCommand = (parsed: ParsedArgv): CommandName => {
   throw new Error(`unknown command "${command}". Use --help to see usage`)
 }
 
+/**
+ * Runs the ecsenv CLI with parsed arguments and dispatches to the selected command.
+ */
 export const main = async (argv: readonly string[] = process.argv.slice(2)): Promise<void> => {
   const parsed = parseArgv(argv)
   if (hasFlag(parsed, 'help') || parsed.positionals[0] === 'help') {

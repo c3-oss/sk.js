@@ -2,12 +2,21 @@ import { GetSecretValueCommand, SecretsManagerClient } from '@aws-sdk/client-sec
 
 import { log } from '../logger.js'
 
+/**
+ * Reference to an ECS secret and optional JSON key used to produce one environment variable.
+ */
 export interface SecretReference {
+  /** Environment variable name that will receive the resolved secret value. */
   readonly envName: string
+  /** Secrets Manager ARN, without an ECS JSON-key suffix. */
   readonly secretArn: string
+  /** Optional JSON property name inside the secret string. */
   readonly secretKey?: string
 }
 
+/**
+ * Parses an ECS secret `valueFrom` string into its base secret ARN and optional JSON key.
+ */
 export const parseSecretReference = (envName: string, valueFromRaw: string): SecretReference | undefined => {
   const valueFrom = valueFromRaw.endsWith('::') ? valueFromRaw.slice(0, -2) : valueFromRaw
   const segments = valueFrom.split(':')
@@ -21,6 +30,9 @@ export const parseSecretReference = (envName: string, valueFromRaw: string): Sec
   return { envName, secretArn, secretKey }
 }
 
+/**
+ * Collects literal environment variables and secret references from ECS container definitions.
+ */
 export const collectEnvironmentAndSecretReferences = (
   containers: readonly {
     readonly environment?: readonly { readonly name?: string; readonly value?: string }[]
@@ -55,6 +67,9 @@ export const collectEnvironmentAndSecretReferences = (
   return { environment, secretRefs }
 }
 
+/**
+ * Splits an array into fixed-size chunks for bounded concurrent AWS requests.
+ */
 const chunk = <T>(array: readonly T[], size: number): T[][] => {
   const chunks: T[][] = []
   for (let i = 0; i < array.length; i += size) {
@@ -63,6 +78,9 @@ const chunk = <T>(array: readonly T[], size: number): T[][] => {
   return chunks
 }
 
+/**
+ * Resolves ECS secret references into environment variable values from AWS Secrets Manager.
+ */
 export const resolveSecrets = async (
   secretRefs: readonly SecretReference[],
   region: string,
@@ -104,8 +122,9 @@ export const resolveSecrets = async (
 
     try {
       const parsedSecret = JSON.parse(secretRaw) as Record<string, string>
-      if (typeof parsedSecret[reference.secretKey] === 'string') {
-        resolvedSecrets[reference.envName] = parsedSecret[reference.secretKey]
+      const secretValue = parsedSecret[reference.secretKey]
+      if (typeof secretValue === 'string') {
+        resolvedSecrets[reference.envName] = secretValue
       }
     } catch (error) {
       log.warn(`failed to parse secret JSON for ${reference.envName} (ARN: ${reference.secretArn}): ${error}`)

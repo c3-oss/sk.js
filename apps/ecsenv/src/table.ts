@@ -1,5 +1,11 @@
+/**
+ * Supported output formats for list commands.
+ */
 export type ListOutputFormat = 'table' | 'json'
 
+/**
+ * Parses and validates the list output format flag.
+ */
 export const parseListOutputFormat = (rawValue: string | undefined): ListOutputFormat => {
   const value = (rawValue ?? 'table').trim().toLowerCase()
   if (value === 'table' || value === 'json') {
@@ -8,6 +14,9 @@ export const parseListOutputFormat = (rawValue: string | undefined): ListOutputF
   throw new Error(`invalid --output-format value "${rawValue}". Use table or json`)
 }
 
+/**
+ * Converts arbitrary table cell values into printable strings.
+ */
 export const stringifyCell = (value: unknown): string => {
   if (value === undefined || value === null) {
     return ''
@@ -21,6 +30,9 @@ export const stringifyCell = (value: unknown): string => {
   return JSON.stringify(value)
 }
 
+/**
+ * Renders row objects as a plain fixed-width table.
+ */
 export const renderTable = (rows: readonly Record<string, unknown>[]): string => {
   if (rows.length === 0) {
     return 'No results'
@@ -41,6 +53,9 @@ export const renderTable = (rows: readonly Record<string, unknown>[]): string =>
   return [header, separator, ...data].join('\n')
 }
 
+/**
+ * Prints rows in the requested output format.
+ */
 export const printRows = (
   rows: readonly Record<string, unknown>[],
   outputFormat: ListOutputFormat,

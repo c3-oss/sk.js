@@ -1,19 +1,30 @@
 import type { PrettyLogLine, Provider } from '../dtos/types.js'
 import { nowIso } from '../utils/time.js'
 
+/** Normalized interpretation of one streamed provider output line. */
 export interface ParsedLine {
+  /** Human-facing log line for TUI display. */
   readonly pretty?: PrettyLogLine
+  /** Incremental assistant text to append to task output. */
   readonly outputDelta?: string
+  /** Complete final response when the provider marks one explicitly. */
   readonly finalOutput?: string
+  /** Provider or runner error message inferred from the line. */
   readonly errorMessage?: string
 }
 
+/** Creates a timestamped informational log line. */
 const info = (text: string): PrettyLogLine => ({ ts: nowIso(), level: 'info', text })
+/** Creates a timestamped warning log line. */
 const warn = (text: string): PrettyLogLine => ({ ts: nowIso(), level: 'warn', text })
+/** Creates a timestamped error log line. */
 const error = (text: string): PrettyLogLine => ({ ts: nowIso(), level: 'error', text })
+/** Creates a timestamped tool activity log line. */
 const tool = (text: string): PrettyLogLine => ({ ts: nowIso(), level: 'tool', text })
+/** Creates a timestamped assistant output log line. */
 const assistant = (text: string): PrettyLogLine => ({ ts: nowIso(), level: 'assistant', text })
 
+/** Extracts assistant text from the message shapes emitted by provider CLIs. */
 const readTextFromMessage = (payload: unknown): string | undefined => {
   if (typeof payload === 'string') {
     return payload
@@ -51,6 +62,7 @@ const readTextFromMessage = (payload: unknown): string | undefined => {
   return undefined
 }
 
+/** Parses only complete JSON object lines and ignores plain text output. */
 const parseJsonLine = (line: string): unknown | null => {
   const normalized = line.trim()
   if (!(normalized.startsWith('{') && normalized.endsWith('}'))) {
@@ -64,6 +76,7 @@ const parseJsonLine = (line: string): unknown | null => {
   }
 }
 
+/** Normalizes one Claude stream-json event. */
 const parseClaudeLine = (json: Record<string, unknown>, rawLine: string): ParsedLine => {
   const type = json.type
   if (type === 'system' && json.subtype === 'init') {
@@ -104,6 +117,7 @@ const parseClaudeLine = (json: Record<string, unknown>, rawLine: string): Parsed
   return { pretty: info(rawLine) }
 }
 
+/** Normalizes one cursor-agent stream-json event. */
 const parseCursorLine = (json: Record<string, unknown>, rawLine: string): ParsedLine => {
   const type = json.type
 
@@ -140,6 +154,7 @@ const parseCursorLine = (json: Record<string, unknown>, rawLine: string): Parsed
   return { pretty: info(rawLine) }
 }
 
+/** Normalizes one Gemini JSON event. */
 const parseGeminiLine = (json: Record<string, unknown>, rawLine: string): ParsedLine => {
   if ('type' in json && json.type === 'init') {
     const model = typeof json.model === 'string' ? json.model : 'unknown'
@@ -182,6 +197,7 @@ const parseGeminiLine = (json: Record<string, unknown>, rawLine: string): Parsed
   return { pretty: info(rawLine) }
 }
 
+/** Normalizes one Codex exec JSON event. */
 const parseCodexLine = (json: Record<string, unknown>, rawLine: string): ParsedLine => {
   const type = json.type
 
@@ -232,6 +248,7 @@ const parseCodexLine = (json: Record<string, unknown>, rawLine: string): ParsedL
   return { pretty: info(rawLine) }
 }
 
+/** Converts a raw provider output line into display logs and task output state. */
 export const parseProviderLine = (provider: Provider, line: string): ParsedLine => {
   const trimmed = line.trim()
   if (trimmed.length === 0) {

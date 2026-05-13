@@ -1,3 +1,6 @@
+/**
+ * Parsed command-line options for a pip-check-update run.
+ */
 export interface CLIArgs {
   /** Path to pyproject.toml file (positional argument). */
   pyprojectPath: string

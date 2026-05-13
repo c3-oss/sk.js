@@ -8,6 +8,7 @@ import { loadRunRecord } from '../../services/store.js'
 import { validateTemplateWithEntries } from '../../services/template-engine.js'
 import type { RunDraft } from './useRunDraft.js'
 
+/** Starts, tracks, and loads runs for the TUI monitor flow. */
 export const useRunExecution = (onStatusMessage: (message: string) => void, onLoadAll: () => Promise<void>) => {
   const [activeRun, setActiveRun] = useState<RunRecord | null>(null)
   const [isRunning, setIsRunning] = useState(false)

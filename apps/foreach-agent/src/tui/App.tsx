@@ -23,13 +23,18 @@ import { useRunFilters } from './hooks/useRunFilters.js'
 import { useStore } from './hooks/useStore.js'
 import { useTaskFilters } from './hooks/useTaskFilters.js'
 
+/** TUI screen identifiers used for keyboard routing and initial navigation. */
 export type AppScreen = 'templates' | 'run-setup' | 'monitor' | 'runs' | 'task-log'
 
+/** Initial navigation options for launching the TUI from CLI commands. */
 interface AppProps {
+  /** Screen shown when the TUI starts. */
   readonly initialScreen?: AppScreen
+  /** Run id loaded into monitor when starting from tasks or history commands. */
   readonly initialRunId?: string
 }
 
+/** Main Ink application component for template, run setup, monitor, and history screens. */
 const App: React.FC<AppProps> = ({ initialScreen = 'templates', initialRunId }) => {
   const { exit } = useApp()
   const hasBootstrappedInitialRunRef = useRef(false)

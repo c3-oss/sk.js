@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+/** Modal input state for single-line and multi-line TUI editors. */
 export type InputMode =
   | { readonly kind: 'none' }
   | {
@@ -28,6 +29,7 @@ export type InputMode =
       readonly meta?: Record<string, string>
     }
 
+/** Owns transient input overlays and their editable buffers. */
 export const useInputMode = () => {
   const [inputMode, setInputMode] = useState<InputMode>({ kind: 'none' })
   const [pendingTemplateName, setPendingTemplateName] = useState('')

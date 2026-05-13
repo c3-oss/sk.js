@@ -1,17 +1,26 @@
 import type { Provider } from '../dtos/types.js'
 
+/** Provider process options resolved for one task attempt. */
 export interface CommandConfig {
+  /** Provider CLI to invoke. */
   readonly provider: Provider
+  /** Model name passed to the provider CLI. */
   readonly model: string
+  /** Whether to request unattended approval behavior from the provider. */
   readonly autoApproval: boolean
+  /** Working directory used by providers that need it in arguments. */
   readonly cwd: string
 }
 
+/** Concrete executable and arguments used to launch a provider CLI. */
 export interface ProviderCommand {
+  /** Binary name expected on PATH. */
   readonly command: string
+  /** Arguments passed without shell interpolation. */
   readonly args: readonly string[]
 }
 
+/** Builds the provider-specific command line for one task attempt. */
 export const buildProviderCommand = ({ provider, model, autoApproval, cwd }: CommandConfig): ProviderCommand => {
   switch (provider) {
     case 'claude': {

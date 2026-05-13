@@ -1,5 +1,8 @@
 import util from 'node:util'
 
+/**
+ * Normalizes unknown thrown values into Error instances for CLI reporting.
+ */
 export const errorWrapper = (error: unknown): Error => {
   if (error instanceof Error) {
     return error

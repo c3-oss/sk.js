@@ -1,5 +1,9 @@
 import { defineConfig } from 'tsup'
 
+/**
+ * Base tsup configuration for packages that emit both CommonJS and ESM builds
+ * with generated declaration files.
+ */
 export const configBase = defineConfig({
   entry: ['src/index.ts'],
   format: ['cjs', 'esm'],
@@ -8,6 +12,9 @@ export const configBase = defineConfig({
   silent: true,
 })
 
+/**
+ * Production tsup configuration that minifies the base build with terser.
+ */
 export const configMinified = defineConfig({
   ...configBase,
   minify: 'terser',
@@ -23,4 +30,7 @@ export const configMinified = defineConfig({
   },
 })
 
+/**
+ * Default shared tsup configuration for publishable packages.
+ */
 export default configMinified
