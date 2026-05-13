@@ -1,7 +1,7 @@
 {
   "name": "@c3-oss/ecsenv",
   "description": "Fetch ECS Environments - Interactive TUI for injecting AWS ECS secrets and environment variables",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "repository": {
@@ -32,8 +32,8 @@
     "bump:all": "npm run bump:dev && npm run bump:prod"
   },
   "dependencies": {
-    "@aws-sdk/client-ecs": "^3.864.0",
-    "@aws-sdk/client-secrets-manager": "^3.864.0",
+    "@aws-sdk/client-ecs": "^3.1045.0",
+    "@aws-sdk/client-secrets-manager": "^3.1045.0",
     "@c3-oss/aws-wrapper-ecs": "workspace:^",
     "@c3-oss/logger": "workspace:^",
     "@c3-oss/typeguard": "workspace:^",
@@ -55,8 +55,8 @@
     "dotenv": "^17.2.1",
     "dotenv-expand": "^12.0.2",
     "npm-check-updates": "^18.0.2",
-    "tsup": "^8.5.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.2",
-    "vitest": "^3.2.4"
+    "vitest": "^4.1.6"
   }
 }

@@ -27,7 +27,7 @@
     "packages/*"
   ],
   "engines": {
-    "node": ">=22"
+    "node": ">=22.12.0"
   },
   "config": {
     "commitizen": {
@@ -36,32 +36,60 @@
   },
   "dependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@changesets/cli": "^2.29.7",
-    "@commitlint/cli": "^19.8.1",
-    "@commitlint/config-conventional": "^19.8.1",
-    "@commitlint/cz-commitlint": "^19.8.1",
-    "@modelcontextprotocol/inspector": "^0.17.2",
+    "@changesets/cli": "^2.31.0",
+    "@commitlint/cli": "^21.0.1",
+    "@commitlint/config-conventional": "^21.0.1",
+    "@commitlint/cz-commitlint": "^21.0.1",
+    "@modelcontextprotocol/inspector": "^0.21.2",
     "@swc-node/register": "^1.11.1",
     "@swc/core": "^1.13.5",
     "@swc/helpers": "^0.5.17",
     "@types/node": "^24.9.1",
-    "@vitest/coverage-v8": "^3.2.4",
+    "@vitest/coverage-v8": "^4.1.6",
     "commitizen": "^4.3.1",
     "concurrently": "^9.2.1",
     "husky": "^9.1.7",
     "inquirer": "^12.10.0",
     "npm-check-updates": "^17.1.18",
-    "tsup": "^8.5.0",
+    "tsup": "^8.5.1",
     "turbo": "^2.5.8",
-    "typedoc": "^0.28.14",
-    "typedoc-plugin-coverage": "^3.4.1",
+    "typedoc": "^0.28.19",
+    "typedoc-plugin-coverage": "^4.0.3",
     "typedoc-plugin-rename-defaults": "^0.7.3",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
+    "vite": "7.3.3",
+    "vitest": "^4.1.6"
   },
   "optionalDependencies": {
-    "@swc/core-darwin-x64": "^1.13.21",
-    "@rollup/rollup-linux-arm64-gnu": "^4.52.5",
-    "@rollup/rollup-linux-x64-gnu": "^4.52.5"
+    "@rollup/rollup-linux-arm64-gnu": "^4.60.3",
+    "@rollup/rollup-linux-x64-gnu": "^4.60.3",
+    "@swc/core-darwin-x64": "^1.13.21"
+  },
+  "pnpm": {
+    "overrides": {
+      "ajv@6": "6.14.0",
+      "ajv@8": "8.20.0",
+      "body-parser": "2.2.2",
+      "brace-expansion@1": "1.1.13",
+      "brace-expansion@2": "2.0.3",
+      "diff": "4.0.4",
+      "fast-uri": "3.1.2",
+      "fast-xml-parser": "5.7.2",
+      "flatted": "3.4.2",
+      "glob": "10.5.0",
+      "js-yaml@3": "3.14.2",
+      "js-yaml@4": "4.1.1",
+      "lodash": "4.18.1",
+      "minimatch@3": "3.1.4",
+      "minimatch@9": "9.0.7",
+      "path-to-regexp": "8.4.2",
+      "picomatch@2": "2.3.2",
+      "picomatch@4": "4.0.4",
+      "postcss": "8.5.10",
+      "qs": "6.15.1",
+      "rollup": "4.60.3",
+      "tmp": "0.2.4",
+      "vite": "7.3.3"
+    }
   }
 }

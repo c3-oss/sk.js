@@ -1,7 +1,7 @@
 {
   "name": "@c3-oss/config-tsup",
   "description": "Shareable Tsup configurations",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "commonjs",
   "types": "./dist/index.d.ts",
@@ -33,6 +33,6 @@
   },
   "dependencies": {
     "terser": "^5.39.0",
-    "tsup": "^8.4.0"
+    "tsup": "^8.5.0"
   }
 }

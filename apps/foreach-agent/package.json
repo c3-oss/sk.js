@@ -1,7 +1,7 @@
 {
   "name": "@c3-oss/foreach-agent",
   "description": "Terminal UI to run prompt templates across multiple AI coding agents",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "repository": {
@@ -35,9 +35,9 @@
   "dependencies": {
     "filtrex": "^3.1.0",
     "ink": "^6.3.1",
-    "liquidjs": "^10.24.0",
+    "liquidjs": "^10.25.7",
     "react": "^19.1.1",
-    "yaml": "^2.8.1"
+    "yaml": "^2.9.0"
   },
   "devDependencies": {
     "@c3-oss/config-biome": "workspace:^",
@@ -47,7 +47,7 @@
     "@swc/core": "^1.13.5",
     "@types/node": "^24.9.1",
     "@types/react": "^19.1.13",
-    "tsup": "^8.5.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3"
   }
 }

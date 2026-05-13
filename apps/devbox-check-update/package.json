@@ -1,7 +1,7 @@
 {
   "name": "@c3-oss/devbox-check-update",
   "description": "CLI to check and update Devbox packages in devbox.json files",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "repository": {
@@ -46,8 +46,8 @@
     "@swc-node/register": "^1.11.1",
     "@swc/core": "^1.13.5",
     "@types/node": "^24.9.1",
-    "tsup": "^8.5.0",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^3.2.4"
+    "vitest": "^4.1.6"
   }
 }

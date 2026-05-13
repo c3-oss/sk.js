@@ -1,13 +1,9 @@
-# @c3-oss/config-tsup
+# @c3-oss/ecsenv
 
-## 0.2.1
+## 0.1.1
 
 ### Patch Changes
 
 - Update vulnerable dependency families and supported Vitest peer range.
-
-## 0.2.0
-
-### Minor Changes
-
-- Non-minified config for `tsup`
+- Updated dependencies
+  - @c3-oss/aws-wrapper-ecs@0.4.1

@@ -6,10 +6,10 @@ export const vitestConfig = defineConfig({
   test: {
     passWithNoTests: true,
     coverage: {
-      all: true,
       provider: 'v8',
       reportsDirectory: './coverage',
       reporter: ['text', 'json', 'html'],
+      include: ['src/**/*.{ts,tsx,cts,mts}'],
       exclude: [
         '*.cjs',
         '*.js',

@@ -1,13 +1,7 @@
-# @c3-oss/config-tsup
+# @c3-oss/foreach-agent
 
-## 0.2.1
+## 0.1.1
 
 ### Patch Changes
 
 - Update vulnerable dependency families and supported Vitest peer range.
-
-## 0.2.0
-
-### Minor Changes
-
-- Non-minified config for `tsup`
