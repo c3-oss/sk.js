@@ -1,7 +1,7 @@
 {
-  "name": "@c3-oss/aws-wrapper-ecs",
-  "description": "Simpler DX for AWS ECS",
-  "version": "0.4.0",
+  "name": "@c3-oss/devbox-check-update",
+  "description": "CLI to check and update Devbox packages in devbox.json files",
+  "version": "0.1.0",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "repository": {
@@ -14,10 +14,18 @@
     ".": {
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./cli": {
+      "import": "./dist/cli.js",
+      "require": "./dist/cli.cjs"
     }
   },
+  "bin": {
+    "devbox-check-update": "./dist/cli.js"
+  },
   "scripts": {
-    "build": "concurrently tsc tsup",
+    "start": "node --import @swc-node/register/esm-register src/cli.ts",
+    "build": "tsup --config tsup.config.ts",
     "lint": "biome check .",
     "lint:fix": "biome check --fix .",
     "lint:fix-unsafe": "biome check --fix --unsafe .",
@@ -29,22 +37,17 @@
     "bump:all": "npm run bump:dev && npm run bump:prod"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch": "^3.893.0",
-    "@aws-sdk/client-ecs": "^3.893.0",
-    "@c3-oss/logger": "workspace:^0.1.0",
-    "@c3-oss/typeguard": "workspace:^0.2.0",
-    "@c3-oss/types": "workspace:^0.1.0",
-    "camelize-ts": "^3.0.0",
-    "fp-ts": "^2.16.11",
-    "lodash": "^4.17.21",
-    "luxon": "^3.7.2"
+    "chalk": "^4.1.2"
   },
   "devDependencies": {
-    "@c3-oss/config-biome": "workspace:^0.3.1",
-    "@c3-oss/config-tsup": "workspace:^0.2.0",
-    "@c3-oss/config-typescript": "workspace:^0.1.0",
-    "@c3-oss/config-vitest": "workspace:^0.3.0",
-    "@types/lodash": "^4.17.20",
-    "@types/luxon": "^3.7.1"
+    "@c3-oss/config-biome": "workspace:^",
+    "@c3-oss/config-typescript": "workspace:^",
+    "@c3-oss/config-vitest": "workspace:^",
+    "@swc-node/register": "^1.11.1",
+    "@swc/core": "^1.13.5",
+    "@types/node": "^24.9.1",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
   }
 }
