@@ -1,6 +1,6 @@
 # c3-oss/sk.js - Small npm tools for sharp TypeScript work.
 
-sk.js is C3's public TypeScript toolkit: a pnpm/Turbo monorepo of focused npm packages for CLIs,
+sk.js is C3's public TypeScript toolkit: a Bun/Turbo monorepo of focused npm packages for CLIs,
 AWS workflows, terminal tooling, shared configs, logging, types, and small reusable utilities.
 
 CLIs - Libraries - Shared configs - Release-ready npm workspaces
@@ -58,7 +58,8 @@ fim --help
 - `@c3-oss/types` - Generic shared TypeScript types.
 - `@c3-oss/config-biome` - Shareable Biome configuration.
 - `@c3-oss/config-eslint` - Shareable ESLint configurations.
-- `@c3-oss/config-tsup` - Shareable tsup configuration.
+- `@c3-oss/config-tsdown` - Shareable tsdown configuration.
+- `@c3-oss/config-tsup` - Compatibility shim for the former tsup configuration package.
 - `@c3-oss/config-typescript` - Shareable TypeScript configuration.
 - `@c3-oss/config-vitest` - Shareable Vitest configuration.
 
@@ -75,22 +76,22 @@ The goal is to keep each package narrow, scriptable, and useful on its own.
 Install dependencies:
 
 ```bash
-pnpm install
+bun install
 ```
 
 Run the full monorepo checks:
 
 ```bash
-just build-all
-just lint-all
-just test-all
+bun run build-all
+bun run lint-all
+bun run test-all
 ```
 
 Target one workspace:
 
 ```bash
-pnpm turbo run test --filter=@c3-oss/logger
-pnpm --filter @c3-oss/foreach-agent start
+bun run turbo run test --filter=@c3-oss/logger
+bun --filter @c3-oss/foreach-agent start
 ```
 
 ## Releases
@@ -98,7 +99,7 @@ pnpm --filter @c3-oss/foreach-agent start
 Package releases are managed with Changesets. Add a changeset for publishable package changes:
 
 ```bash
-pnpm changeset
+bun changeset
 ```
 
 Each package is versioned and published independently under `@c3-oss/*`.

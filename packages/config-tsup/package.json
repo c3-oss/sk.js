@@ -1,10 +1,10 @@
 {
   "name": "@c3-oss/config-tsup",
-  "description": "Shareable Tsup configurations",
+  "description": "Compatibility shim for @c3-oss/config-tsdown",
   "version": "0.2.1",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "commonjs",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/c3-oss/sk.js.git"
@@ -12,27 +12,29 @@
   "files": ["dist"],
   "exports": {
     ".": {
+      "types": "./dist/index.d.mts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "require": "./dist/index.cjs"
     }
   },
   "scripts": {
-    "build": "concurrently 'tsc' 'tsup --config src/index.ts'",
+    "build": "concurrently \"tsgo --noEmit\" \"tsdown src/index.ts --format cjs --format esm --dts --clean --deps.skip-node-modules-bundle\"",
     "lint": "biome check .",
     "lint:fix": "biome format --write .",
     "lint:fix-unsafe": "biome check --fix --unsafe .",
     "clean": "rm -rf dist node_modules .turbo",
     "bump:dev": "ncu --upgrade --dep dev --target minor",
     "bump:prod": "ncu --upgrade --dep prod --target minor",
-    "bump:all": "npm run bump:dev && npm run bump:prod"
+    "bump:all": "bun run bump:dev && bun run bump:prod"
   },
   "devDependencies": {
     "@c3-oss/config-biome": "workspace:^0.3.0",
     "@c3-oss/config-typescript": "workspace:^0.1.0",
-    "concurrently": "^9.1.2"
+    "@typescript/native-preview": "beta",
+    "concurrently": "^9.1.2",
+    "tsdown": "^0.22.0"
   },
   "dependencies": {
-    "terser": "^5.39.0",
-    "tsup": "^8.5.0"
+    "@c3-oss/config-tsdown": "workspace:^0.1.0"
   }
 }

@@ -10,20 +10,17 @@
     "incremental": false,
     "isolatedModules": true,
     "strictPropertyInitialization": true,
-    "lib": [
-      "ES2021",
-      "ES2022",
-      "ES2023",
-      "DOM"
-    ],
+    "lib": ["ES2021", "ES2022", "ES2023", "ESNext", "DOM"],
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
     "removeComments": false,
     "resolveJsonModule": true,
     "strict": true,
     "target": "ES2020",
+    "types": ["node"]
   }
 }

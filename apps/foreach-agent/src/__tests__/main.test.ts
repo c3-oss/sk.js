@@ -139,7 +139,10 @@ describe('main CLI', () => {
     await main(['tasks', '--run-id', 'run-123', '--output-format', 'interactive'])
 
     expect(renderMock).toHaveBeenCalledTimes(1)
-    const element = renderMock.mock.calls[0]?.[0] as { props?: { initialRunId?: string; initialScreen?: string } }
+    const calls = renderMock.mock.calls as unknown as Array<[unknown]>
+    const element = calls[0]?.[0] as {
+      props?: { initialRunId?: string; initialScreen?: string }
+    }
     expect(element.props?.initialRunId).toBe('run-123')
     expect(element.props?.initialScreen).toBe('monitor')
   })

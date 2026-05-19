@@ -4,7 +4,7 @@
   "version": "0.3.1",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/c3-oss/sk.js.git"
@@ -12,25 +12,28 @@
   "files": ["dist"],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
   "scripts": {
-    "build": "tsup src/index.mts --format cjs,esm --dts --clean --silent",
-    "build:tsc": "tsc",
+    "build": "concurrently \"tsgo --noEmit\" \"tsdown src/index.mts --format cjs --format esm --dts --clean --deps.skip-node-modules-bundle\"",
+    "build:tsgo": "tsgo --noEmit",
     "lint": "biome check .",
     "lint:fix": "biome format --write .",
     "lint:fix-unsafe": "biome check --fix --unsafe .",
     "clean": "rm -rf coverage dist node_modules .turbo",
     "bump:dev": "ncu --upgrade --dep dev --target minor",
     "bump:prod": "ncu --upgrade --dep prod --target minor",
-    "bump:all": "npm run bump:dev && npm run bump:prod"
+    "bump:all": "bun run bump:dev && bun run bump:prod"
   },
   "devDependencies": {
     "@c3-oss/config-biome": "workspace:^0.3.0",
-    "@c3-oss/config-typescript": "workspace:^0.1.0"
+    "@c3-oss/config-typescript": "workspace:^0.1.0",
+    "@typescript/native-preview": "beta",
+    "concurrently": "^9.2.1",
+    "tsdown": "^0.22.0"
   },
   "peerDependencies": {
     "vitest": "^3.1.1 || ^4.1.6"
