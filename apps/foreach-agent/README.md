@@ -22,19 +22,19 @@ Interactive mode (default):
 
 ```bash
 cd apps/foreach-agent
-pnpm start
+bun start
 ```
 
 or:
 
 ```bash
-pnpm start tui
+bun start tui
 ```
 
 Build:
 
 ```bash
-pnpm --filter @c3-oss/foreach-agent build
+bun --filter @c3-oss/foreach-agent build
 ```
 
 ## Headless CLI
@@ -42,12 +42,12 @@ pnpm --filter @c3-oss/foreach-agent build
 Main commands:
 
 ```bash
-pnpm start run --template my-template.liquid --entries '[{"name":"world"}]'
-pnpm start templates list --output-format table
-pnpm start runs --query 'status == "failed"'
-pnpm start tasks --run-id <runId> --query 'provider == "codex" and hasError'
-pnpm start configs --query 'concurrency >= 10 and autoApproval'
-pnpm start export --run-id <runId> --format csv --output /tmp/run.csv
+bun start run --template my-template.liquid --entries '[{"name":"world"}]'
+bun start templates list --output-format table
+bun start runs --query 'status == "failed"'
+bun start tasks --run-id <runId> --query 'provider == "codex" and hasError'
+bun start configs --query 'concurrency >= 10 and autoApproval'
+bun start export --run-id <runId> --format csv --output /tmp/run.csv
 ```
 
 ### `--output-format` (tfplan-explorer style)
@@ -71,10 +71,10 @@ Note:
 Examples:
 
 ```bash
-pnpm start runs --output-format interactive
-pnpm start runs --output-format table
-pnpm start runs --output-format json --query 'failedTasks > 0'
-pnpm start templates list --output-format csv
+bun start runs --output-format interactive
+bun start runs --output-format table
+bun start runs --output-format json --query 'failedTasks > 0'
+bun start templates list --output-format csv
 ```
 
 ### Template CRUD subcommands
@@ -82,25 +82,25 @@ pnpm start templates list --output-format csv
 Create:
 
 ```bash
-pnpm start templates create --name my-template --content 'Hello {{ name }}'
+bun start templates create --name my-template --content 'Hello {{ name }}'
 ```
 
 Read:
 
 ```bash
-pnpm start templates read --id my-template.liquid --output-format json
+bun start templates read --id my-template.liquid --output-format json
 ```
 
 Update:
 
 ```bash
-pnpm start templates update --id my-template.liquid --content 'Hi {{ name }}'
+bun start templates update --id my-template.liquid --content 'Hi {{ name }}'
 ```
 
 Delete:
 
 ```bash
-pnpm start templates delete --id my-template.liquid
+bun start templates delete --id my-template.liquid
 ```
 
 Content input for create/update:
@@ -112,7 +112,7 @@ Content input for create/update:
 ### Run without TUI
 
 ```bash
-pnpm start run \
+bun start run \
   --template my-template.liquid \
   --entries-path /abs/path/entries.yaml \
   --providers 'claude,codex' \
@@ -137,10 +137,10 @@ Entries input options:
 Examples:
 
 ```bash
-pnpm start runs --query 'failedTasks > 0'
-pnpm start templates list --query 'variablesCount >= 3 and content ~= "TODO"'
-pnpm start tasks --run-id <runId> --query 'provider == "codex" and status != "success"'
-pnpm start configs --query 'timeoutSeconds == -1 and autoApproval'
+bun start runs --query 'failedTasks > 0'
+bun start templates list --query 'variablesCount >= 3 and content ~= "TODO"'
+bun start tasks --run-id <runId> --query 'provider == "codex" and status != "success"'
+bun start configs --query 'timeoutSeconds == -1 and autoApproval'
 ```
 
 Available query fields:

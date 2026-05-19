@@ -1,15 +1,15 @@
 {
-  "name": "@c3-oss/drizzle-ulid",
-  "description": "Drizzle custom type for ULIDs",
-  "version": "1.0.1",
+  "name": "@c3-oss/config-tsdown",
+  "description": "Shareable tsdown configurations",
+  "version": "0.1.0",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
+  "types": "./dist/index.d.mts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/c3-oss/sk.js.git"
   },
   "files": ["dist"],
-  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
       "types": "./dist/index.d.mts",
@@ -18,29 +18,22 @@
     }
   },
   "scripts": {
-    "start": "bun src/index.ts",
-    "build": "concurrently \"tsgo --noEmit\" \"tsdown --deps.skip-node-modules-bundle\"",
+    "build": "concurrently \"tsgo --noEmit\" \"tsdown src/index.ts --format cjs --format esm --dts --clean --deps.skip-node-modules-bundle\"",
     "lint": "biome check .",
-    "lint:fix": "biome check --fix .",
+    "lint:fix": "biome format --write .",
     "lint:fix-unsafe": "biome check --fix --unsafe .",
-    "clean": "rm -rf coverage dist node_modules .turbo",
-    "test": "vitest run",
-    "test:coverage": "vitest run --coverage --reporter=verbose",
+    "clean": "rm -rf dist node_modules .turbo",
     "bump:dev": "ncu --upgrade --dep dev --target minor",
     "bump:prod": "ncu --upgrade --dep prod --target minor",
     "bump:all": "bun run bump:dev && bun run bump:prod"
   },
-  "dependencies": {
-    "drizzle-orm": "^0.45.2",
-    "ulidx": "^2.4.1"
-  },
   "devDependencies": {
-    "@c3-oss/config-biome": "workspace:^0.3.1",
-    "@c3-oss/config-tsdown": "workspace:^0.1.0",
+    "@c3-oss/config-biome": "workspace:^0.3.0",
     "@c3-oss/config-typescript": "workspace:^0.1.0",
-    "@c3-oss/config-vitest": "workspace:^0.3.1",
-    "@types/pg": "^8.15.5",
     "@typescript/native-preview": "beta",
+    "concurrently": "^9.1.2"
+  },
+  "dependencies": {
     "tsdown": "^0.22.0"
   }
 }

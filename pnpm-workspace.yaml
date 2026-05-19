@@ -1,9 +1,0 @@
-packages:
-  - packages/*
-  - apps/*
-
-onlyBuiltDependencies:
-  - '@biomejs/biome'
-  - '@swc/core'
-  - esbuild
-  - unrs-resolver

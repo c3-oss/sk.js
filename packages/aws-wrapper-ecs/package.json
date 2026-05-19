@@ -9,15 +9,16 @@
     "url": "git+https://github.com/c3-oss/sk.js.git"
   },
   "files": ["dist"],
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
   "scripts": {
-    "build": "concurrently tsc tsup",
+    "build": "concurrently \"tsgo --noEmit\" \"tsdown --deps.skip-node-modules-bundle\"",
     "lint": "biome check .",
     "lint:fix": "biome check --fix .",
     "lint:fix-unsafe": "biome check --fix --unsafe .",
@@ -26,7 +27,7 @@
     "test:coverage": "vitest run --coverage --reporter=verbose",
     "bump:dev": "ncu --upgrade --dep dev --target minor",
     "bump:prod": "ncu --upgrade --dep prod --target minor",
-    "bump:all": "npm run bump:dev && npm run bump:prod"
+    "bump:all": "bun run bump:dev && bun run bump:prod"
   },
   "dependencies": {
     "@aws-sdk/client-cloudwatch": "^3.1045.0",
@@ -41,10 +42,12 @@
   },
   "devDependencies": {
     "@c3-oss/config-biome": "workspace:^0.3.1",
-    "@c3-oss/config-tsup": "workspace:^0.2.1",
+    "@c3-oss/config-tsdown": "workspace:^0.1.0",
     "@c3-oss/config-typescript": "workspace:^0.1.0",
     "@c3-oss/config-vitest": "workspace:^0.3.1",
     "@types/lodash": "^4.17.20",
-    "@types/luxon": "^3.7.1"
+    "@types/luxon": "^3.7.1",
+    "@typescript/native-preview": "beta",
+    "tsdown": "^0.22.0"
   }
 }

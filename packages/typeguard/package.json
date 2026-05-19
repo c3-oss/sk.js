@@ -8,28 +8,30 @@
     "type": "git",
     "url": "git+https://github.com/c3-oss/sk.js.git"
   },
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
+      "types": "./dist/index.d.mts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
     }
   },
   "scripts": {
-    "build": "concurrently tsc tsup",
+    "build": "concurrently \"tsgo --noEmit\" \"tsdown --deps.skip-node-modules-bundle\"",
     "lint": "biome check .",
     "lint:fix": "biome format --write .",
     "lint:fix-unsafe": "biome check --fix --unsafe .",
     "clean": "rm -rf coverage dist node_modules .turbo",
     "bump:dev": "ncu --upgrade --dep dev --target minor",
     "bump:prod": "ncu --upgrade --dep prod --target minor",
-    "bump:all": "npm run bump:dev && npm run bump:prod"
+    "bump:all": "bun run bump:dev && bun run bump:prod"
   },
   "devDependencies": {
     "@c3-oss/config-biome": "workspace:^0.3.1",
-    "@c3-oss/config-tsup": "workspace:^0.2.0",
+    "@c3-oss/config-tsdown": "workspace:^0.1.0",
     "@c3-oss/config-typescript": "workspace:^0.1.0",
-    "@c3-oss/types": "workspace:^0.1.0"
-  },
-  "dependencies": {}
+    "@c3-oss/types": "workspace:^0.1.0",
+    "@typescript/native-preview": "beta",
+    "tsdown": "^0.22.0"
+  }
 }

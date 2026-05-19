@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 import { main } from './main.js'
 
 void main().catch((errorValue) => {

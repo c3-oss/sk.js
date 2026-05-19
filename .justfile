@@ -13,29 +13,29 @@ _help:
   @just --list
 
 _execpkg pkg *args:
-  @cd "packages/{{ pkg }}" && node --import @swc-node/register/esm-register src/index.ts {{ args }}
+  @cd "packages/{{ pkg }}" && bun src/index.ts {{ args }}
 
 # --------------------------------------------------------------------------------------------------
 
 # run a turbo command inside a package -- e.g. "just turbo build auth"
 [group('ALIASES')]
 turbo cmd pkg-name *cmd-args:
-  @pnpm turbo run {{ cmd }} {{ cmd-args }} --filter="@c3-oss/{{ pkg-name }}"
+  @bun run turbo run {{ cmd }} {{ cmd-args }} --filter="@c3-oss/{{ pkg-name }}"
 
 # run a turbo command on all packages
 [group('ALIASES')]
 turbo-all cmd:
-  @pnpm turbo run {{ cmd }} --log-order=grouped
+  @bun run turbo run {{ cmd }} --log-order=grouped
 
 # run commitizen, a CLI tool for generating conventional commits (interactive)
 [group('ALIASES')]
 commit:
-  @pnpm cz
+  @bun run cz
 
 # inspect an MCP server
 [group('ALIASES')]
 mcp-inspect server:
-  @pnpm mcp-inspector --config mcp-server-config.json --server {{ server }}
+  @bun run mcp-inspector --config mcp-server-config.json --server {{ server }}
 
 # --------------------------------------------------------------------------------------------------
 
@@ -54,7 +54,7 @@ build-all:
 # upgrade all dependencies of all packages (MINOR and PATCH versions only)
 [group('PROJECT MAINTENANCE')]
 bump-all-deps:
-  @pnpm turbo bump:all
+  @bun run turbo run bump:all
 
 # remove all build artifacts, caches and turbo logs
 [group('PROJECT MAINTENANCE')]
@@ -64,7 +64,7 @@ clean-all:
 # generate code documentation for all packages
 [group('PROJECT MAINTENANCE')]
 update-code-docs:
-  @pnpm typedoc
+  @bun run typedoc
 
 # --------------------------------------------------------------------------------------------------
 
@@ -81,12 +81,12 @@ lint-all:
 # run the linter on all packages and fix all auto-fixable issues
 [group('CODE QUALITY')]
 lint-all-fix:
-  @pnpm turbo lint:fix
+  @bun run turbo run lint:fix
 
 # run the linter on all packages and fix all auto-fixable issues
 [group('CODE QUALITY')]
 lint-all-fix-unsafe:
-  @pnpm turbo lint:fix-unsafe
+  @bun run turbo run lint:fix-unsafe
 
 # --------------------------------------------------------------------------------------------------
 
@@ -110,23 +110,23 @@ test-all-coverage:
 # create a package release plan (interactive)
 [group('PACKAGE RELEASING')]
 release-plan:
-  @pnpm changeset
+  @bun run changeset
 
 # apply the release plan created by "release-plan"
 [group('PACKAGE RELEASING')]
 release-apply:
-  @pnpm changeset version
+  @bun run changeset version
 
 # publish all packages with new versions to the registry
 [group('PACKAGE RELEASING')]
 release-publish:
   @just build-all
-  @pnpm changeset publish --no-git-tag
+  @bun run changeset publish --no-git-tag
 
 # prepare to publish packages -- build, lint, test and apply remaining changesets
 [group('PACKAGE RELEASING')]
 release-prepare-publish:
-  @turbo run build lint test
+  @bun run turbo run build lint test
   @just release-apply
 
 # git commit for each package that will be released
