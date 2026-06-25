@@ -1,7 +1,7 @@
 {
   "name": "@c3-oss/foreach-agent",
   "description": "Terminal UI to run prompt templates across multiple AI coding agents",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "repository": {
