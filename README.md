@@ -107,3 +107,17 @@ Each package is versioned and published independently under `@c3-oss/*`.
 
 Detailed usage lives in the package-level READMEs. Start there for CLI options, examples, and package-specific
 API notes.
+
+## License
+
+To the extent possible under law, [Caian Ertl][me] has waived __all copyright
+and related or neighboring rights to this work__. In the spirit of _freedom of
+information_, I encourage you to fork, modify, change, share, or do whatever
+you like with this project! [`^C ^V`][kopimi]
+
+[![License][cc-shield]][cc-url]
+
+[me]: https://github.com/upsetbit
+[cc-shield]: https://forthebadge.com/images/badges/cc-0.svg
+[cc-url]: http://creativecommons.org/publicdomain/zero/1.0
+[kopimi]: https://kopimi.com
