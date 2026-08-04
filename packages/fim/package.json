@@ -31,7 +31,7 @@
     "@c3-oss/config-vitest": "workspace:^0.3.0",
     "@types/figlet": "^1.7.0",
     "@vitest/coverage-v8": "^4.1.6",
-    "npm-check-updates": "^17.1.16",
+    "npm-check-updates": "^23.0.0",
     "vitest": "^4.1.6"
   },
   "dependencies": {
