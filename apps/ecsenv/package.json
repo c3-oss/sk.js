@@ -32,15 +32,15 @@
     "bump:all": "npm run bump:dev && npm run bump:prod"
   },
   "dependencies": {
-    "@aws-sdk/client-ecs": "^3.1045.0",
-    "@aws-sdk/client-secrets-manager": "^3.1045.0",
+    "@aws-sdk/client-ecs": "^3.1101.0",
+    "@aws-sdk/client-secrets-manager": "^3.1101.0",
     "@c3-oss/aws-wrapper-ecs": "workspace:^",
     "@c3-oss/logger": "workspace:^",
     "@c3-oss/typeguard": "workspace:^",
     "fp-ts": "^2.16.11",
-    "fs-extra": "^11.3.1",
+    "fs-extra": "^11.4.0",
     "ink": "^6.3.1",
-    "react": "^19.1.1"
+    "react": "^19.2.8"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
@@ -48,15 +48,15 @@
     "@c3-oss/config-tsup": "workspace:^",
     "@c3-oss/config-typescript": "workspace:^",
     "@c3-oss/config-vitest": "workspace:^",
-    "@swc-node/register": "^1.11.1",
-    "@swc/core": "^1.13.3",
+    "@swc-node/register": "^1.12.1",
+    "@swc/core": "^1.15.47",
     "@types/fs-extra": "^11.0.4",
-    "@types/react": "^19.1.13",
-    "dotenv": "^17.2.1",
+    "@types/react": "^19.2.18",
+    "dotenv": "^17.4.2",
     "dotenv-expand": "^12.0.2",
     "npm-check-updates": "^18.0.2",
     "tsup": "^8.5.1",
     "typescript": "^5.9.2",
-    "vitest": "^4.1.6"
+    "vitest": "^4.1.10"
   }
 }
