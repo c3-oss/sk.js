@@ -1,7 +1,4 @@
-// @ts-expect-error ...
-import React from 'react'
-
-import figlet, { type Fonts as FigletFonts } from 'figlet'
+import figlet, { type FontName as FigletFonts } from 'figlet'
 import { Text } from 'ink'
 import { useEffect, useState } from 'react'
 

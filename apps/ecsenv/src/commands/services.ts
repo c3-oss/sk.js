@@ -1,7 +1,7 @@
 import type { ParsedArgv } from '../argv.js'
 import { getLastFlagValue, getRegion, requireFlag } from '../argv.js'
-import { listServices } from '../aws/services.js'
 import type { ServiceRecord } from '../aws/services.js'
+import { listServices } from '../aws/services.js'
 import { parseListOutputFormat, printRows } from '../table.js'
 
 /**

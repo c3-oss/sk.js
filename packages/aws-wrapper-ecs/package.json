@@ -29,8 +29,8 @@
     "bump:all": "npm run bump:dev && npm run bump:prod"
   },
   "dependencies": {
-    "@aws-sdk/client-cloudwatch": "^3.1045.0",
-    "@aws-sdk/client-ecs": "^3.1045.0",
+    "@aws-sdk/client-cloudwatch": "^3.1101.0",
+    "@aws-sdk/client-ecs": "^3.1101.0",
     "@c3-oss/logger": "workspace:^0.1.0",
     "@c3-oss/typeguard": "workspace:^0.2.0",
     "@c3-oss/types": "workspace:^0.1.0",
@@ -44,7 +44,7 @@
     "@c3-oss/config-tsup": "workspace:^0.2.1",
     "@c3-oss/config-typescript": "workspace:^0.1.0",
     "@c3-oss/config-vitest": "workspace:^0.3.1",
-    "@types/lodash": "^4.17.20",
-    "@types/luxon": "^3.7.1"
+    "@types/lodash": "^4.17.25",
+    "@types/luxon": "^3.7.3"
   }
 }

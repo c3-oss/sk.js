@@ -8,6 +8,6 @@
     "biome.json"
   ],
   "peerDependencies": {
-    "@biomejs/biome": "^1.9.4"
+    "@biomejs/biome": "^2.5.6"
   }
 }

@@ -17,8 +17,8 @@ import {
   updateTemplate,
 } from './services/store.js'
 import { extractTemplateVariables } from './services/template-engine.js'
-import App from './tui/App.js'
 import type { AppScreen } from './tui/App.js'
+import App from './tui/App.js'
 import { toCsv } from './utils/csv.js'
 
 /** Supported CLI output modes. */

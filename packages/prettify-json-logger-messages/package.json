@@ -41,6 +41,6 @@
     "@c3-oss/config-typescript": "workspace:^0.1.0",
     "@c3-oss/config-vitest": "workspace:^0.3.0",
     "concurrently": "^9.1.2",
-    "npm-check-updates": "^17.1.18"
+    "npm-check-updates": "^23.0.0"
   }
 }

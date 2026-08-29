@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 
 import type { Provider, TaskRecord } from '../../dtos/types.js'
-import { type TaskStatusFilter, cycle, listStatusFilters, providerFilters } from '../helpers/styles.js'
+import { cycle, listStatusFilters, providerFilters, type TaskStatusFilter } from '../helpers/styles.js'
 
 /** Maintains task monitor filters and returns the filtered task list. */
 export const useTaskFilters = (tasks: readonly TaskRecord[]) => {

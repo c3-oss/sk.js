@@ -1,13 +1,11 @@
 // 3rd party
 import { CloudWatchClient } from '@aws-sdk/client-cloudwatch'
 import { ECSClient } from '@aws-sdk/client-ecs'
-
+import type { ECSCreateOptions, ECSListClustersOptions } from './ecs.interface.js'
 // local
 import { pendingTasks } from './metrics.impl.js'
-import { describeServicesWithTaskDefs, listClusters as listClustersImpl, listServices } from './service.impl.js'
-
-import type { ECSCreateOptions, ECSListClustersOptions } from './ecs.interface.js'
 import type { ServiceMetricsOptions } from './metrics.interface.js'
+import { describeServicesWithTaskDefs, listClusters as listClustersImpl, listServices } from './service.impl.js'
 
 // ---------------------------------------------------------------------------------------------------------------------
 

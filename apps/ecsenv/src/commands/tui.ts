@@ -2,8 +2,7 @@ import type { ParsedArgv } from '../argv.js'
 import { getLastFlagValue, getRegion } from '../argv.js'
 import { clusterNameFromArn, listClusters } from '../aws/clusters.js'
 import { extractEnvironment } from '../aws/extract.js'
-import { listServices } from '../aws/services.js'
-import { serviceDisplayName } from '../aws/services.js'
+import { listServices, serviceDisplayName } from '../aws/services.js'
 import { selectOption } from '../ui/selection-prompt.js'
 
 /**

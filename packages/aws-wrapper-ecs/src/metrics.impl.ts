@@ -5,15 +5,12 @@ import {
   type MetricDataQuery,
   type MetricDataResult,
 } from '@aws-sdk/client-cloudwatch'
-
-import { type Either, left, right } from 'fp-ts/lib/Either.js'
-import { DateTime } from 'luxon'
-
+import type { Logger } from '@c3-oss/logger'
 // c3
 import { errorWrapper } from '@c3-oss/typeguard'
-
-import type { Logger } from '@c3-oss/logger'
 import type { Optional } from '@c3-oss/types'
+import { type Either, left, right } from 'fp-ts/lib/Either.js'
+import { DateTime } from 'luxon'
 
 // local
 import type { ServiceMetricsOptions, ServiceMetricsResult } from './metrics.interface.js'
@@ -113,7 +110,7 @@ export const pendingTasks = async (
   options: ServiceMetricsOptions,
   log?: Logger,
 ): Promise<Either<Error, ServiceMetricsResult[]>> => {
-  let nextToken: Optional<string> = undefined
+  let nextToken: Optional<string>
 
   const { start, duration } = options
   const startDate = start.toJSDate()

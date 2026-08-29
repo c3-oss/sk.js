@@ -1,7 +1,7 @@
 import type { ParsedArgv } from '../argv.js'
 import { getLastFlagValue, getRegion } from '../argv.js'
-import { listClusters } from '../aws/clusters.js'
 import type { ClusterRecord } from '../aws/clusters.js'
+import { listClusters } from '../aws/clusters.js'
 import { parseListOutputFormat, printRows } from '../table.js'
 
 /**

@@ -1,6 +1,4 @@
 // 3rd-party
-import { type Either, isLeft, left, right } from 'fp-ts/lib/Either.js'
-import _ from 'lodash'
 
 import {
   DescribeServicesCommand,
@@ -15,11 +13,12 @@ import {
   type ListServicesCommandOutput,
   type Service,
 } from '@aws-sdk/client-ecs'
-
 // c3
 import type { Logger } from '@c3-oss/logger'
 import { errorWrapper } from '@c3-oss/typeguard'
 import type { Optional } from '@c3-oss/types'
+import { type Either, isLeft, left, right } from 'fp-ts/lib/Either.js'
+import _ from 'lodash'
 
 // local
 import type { ServiceWithTaskDef } from './service.interface.js'
@@ -152,7 +151,7 @@ export const listServices = async (
   log?: Logger,
 ): Promise<Either<Error, string[]>> => {
   const arns: string[] = []
-  let nextToken: Optional<string> = undefined
+  let nextToken: Optional<string>
 
   do {
     try {
@@ -179,7 +178,7 @@ export const listServices = async (
  */
 export const listClusters = async (client: ECSClient, log?: Logger): Promise<Either<Error, string[]>> => {
   const arns: string[] = []
-  let nextToken: Optional<string> = undefined
+  let nextToken: Optional<string>
 
   do {
     try {

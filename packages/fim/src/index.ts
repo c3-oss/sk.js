@@ -5,7 +5,7 @@ import util from 'node:util'
 
 // 3rd-party
 import chalk from 'chalk'
-import figlet, { type Fonts } from 'figlet'
+import figlet, { type FontName as Fonts } from 'figlet'
 
 // internal
 import type { FIMArgs } from './dtos/fim-args.dto.js'
@@ -57,7 +57,7 @@ const main = () => {
   /* ... */
 
   if (!showcase) {
-    const banner = figlet.textSync(text, font as Fonts)
+    const banner = figlet.textSync(text, { font: font as Fonts })
     const applyFormatting = flow(indentBanner(indent), colorizeBanner(style))
 
     return cli.bye(applyFormatting(banner))
@@ -71,7 +71,7 @@ const main = () => {
     .flatMap((f) => {
       const m = util.format(" ~~~~ Font '%s':", f)
       const t = chalk.gray(m)
-      const b = figlet.textSync(text, f as Fonts)
+      const b = figlet.textSync(text, { font: f as Fonts })
 
       return [t, '', applyShowcaseFormatting(b), '', '']
     })
