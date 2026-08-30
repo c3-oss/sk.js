@@ -1,4 +1,4 @@
-import { type ParsedArgv, hasFlag, parseArgv } from './argv.js'
+import { hasFlag, type ParsedArgv, parseArgv } from './argv.js'
 import { runClustersCommand } from './commands/clusters.js'
 import { runExtractCommand } from './commands/extract.js'
 import { runServicesCommand } from './commands/services.js'

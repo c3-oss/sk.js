@@ -1,5 +1,6 @@
-import { type Either, type Left, type Right, isLeft, isRight, left, right } from 'fp-ts/lib/Either.js'
-export { type Option, type None, type Some, isSome, isNone, some, none } from 'fp-ts/lib/Option.js'
+import { type Either, isLeft, isRight, type Left, left, type Right, right } from 'fp-ts/lib/Either.js'
+
+export { isNone, isSome, type None, none, type Option, type Some, some } from 'fp-ts/lib/Option.js'
 
 import { errorWrapper } from '@c3-oss/typeguard'
 
@@ -9,7 +10,7 @@ import { errorWrapper } from '@c3-oss/typeguard'
  * Re-exports core Either types and utilities from fp-ts.
  * Provides functional programming constructs for handling computations that may fail.
  */
-export { left, right, isLeft, isRight, type Either }
+export { type Either, isLeft, isRight, left, right }
 
 /**
  * Represents an error with an associated string tag for categorization.

@@ -1,4 +1,4 @@
-import { type ViteUserConfig, defineConfig } from 'vitest/config'
+import { defineConfig, type ViteUserConfig } from 'vitest/config'
 
 /**
  * Builds coverage exclusion globs for filenames that may appear at any package depth.

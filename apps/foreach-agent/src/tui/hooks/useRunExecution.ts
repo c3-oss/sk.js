@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
-
-import type { RunRecord } from '../../dtos/types.js'
-import type { TemplateFile } from '../../dtos/types.js'
+import type { RunRecord, TemplateFile } from '../../dtos/types.js'
 import { parseEntriesFromAbsolutePath, parseEntriesFromText } from '../../services/entries-parser.js'
 import { executeRun } from '../../services/run-executor.js'
 import { loadRunRecord } from '../../services/store.js'

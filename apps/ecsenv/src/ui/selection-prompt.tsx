@@ -1,4 +1,4 @@
-import { Box, Text, render, useInput } from 'ink'
+import { Box, render, Text, useInput } from 'ink'
 import type { ReactElement } from 'react'
 import { useMemo, useState } from 'react'
 

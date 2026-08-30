@@ -43,11 +43,11 @@
     "@c3-oss/config-biome": "workspace:^",
     "@c3-oss/config-typescript": "workspace:^",
     "@c3-oss/config-vitest": "workspace:^",
-    "@swc-node/register": "^1.11.1",
-    "@swc/core": "^1.13.5",
+    "@swc-node/register": "^1.12.1",
+    "@swc/core": "^1.15.47",
     "@types/node": "^24.9.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "vitest": "^4.1.6"
+    "vitest": "^4.1.10"
   }
 }
