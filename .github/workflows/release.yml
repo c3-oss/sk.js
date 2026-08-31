@@ -34,9 +34,6 @@ jobs:
           registry-url: https://registry.npmjs.org
           cache: pnpm
 
-      - name: Update npm
-        run: npm install -g npm@latest
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
         env:
@@ -47,9 +44,10 @@ jobs:
 
       - name: Publish
         run: |
-          # pnpm 10.8.1 forwards --git-checks to npm; npm@latest treats that as an error.
-          npm install -g pnpm@11
-          export PATH="$(npm prefix -g)/bin:$PATH"
+          set -euo pipefail
+          # npm 12 rejects --git-checks; trusted publishing needs npm >= 11.5.1.
+          npm install -g npm@11
+          pnpm config set git-checks false
           if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
             unset NODE_AUTH_TOKEN NPM_TOKEN
             npmrc="${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}"
@@ -62,3 +60,4 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
