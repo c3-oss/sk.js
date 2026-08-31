@@ -45,14 +45,11 @@ jobs:
       - name: Build
         run: pnpm turbo run build
 
-      # pnpm 10.8.1 forwards --git-checks to npm; npm@latest treats that as an error.
-      - name: Setup pnpm 11 for publish
-        uses: pnpm/action-setup@v4
-        with:
-          version: 11
-
       - name: Publish
         run: |
+          # pnpm 10.8.1 forwards --git-checks to npm; npm@latest treats that as an error.
+          npm install -g pnpm@11
+          export PATH="$(npm prefix -g)/bin:$PATH"
           if [ -z "${NODE_AUTH_TOKEN:-}" ]; then
             unset NODE_AUTH_TOKEN NPM_TOKEN
             npmrc="${NPM_CONFIG_USERCONFIG:-$HOME/.npmrc}"
