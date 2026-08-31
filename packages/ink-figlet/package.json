@@ -1,7 +1,7 @@
 {
   "name": "@c3-oss/ink-figlet",
   "description": "Figlet component for Ink",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "repository": {
@@ -34,10 +34,10 @@
     "react": "^19.2.8"
   },
   "devDependencies": {
-    "@c3-oss/config-biome": "workspace:^0.3.1",
-    "@c3-oss/config-tsup": "workspace:^0.2.0",
-    "@c3-oss/config-typescript": "workspace:^0.1.0",
-    "@c3-oss/config-vitest": "workspace:^0.3.0",
+    "@c3-oss/config-biome": "workspace:^1.0.0",
+    "@c3-oss/config-tsup": "workspace:^0.2.2",
+    "@c3-oss/config-typescript": "workspace:^0.1.1",
+    "@c3-oss/config-vitest": "workspace:^0.3.2",
     "@types/figlet": "^1.7.0",
     "@types/react": "^19.2.18"
   }

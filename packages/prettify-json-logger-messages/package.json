@@ -1,7 +1,7 @@
 {
   "name": "@c3-oss/prettify-json-logger-messages",
   "description": "Prettify JSON logger messages",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "repository": {
@@ -36,10 +36,10 @@
     "json-colorizer": "^3.0.1"
   },
   "devDependencies": {
-    "@c3-oss/config-biome": "workspace:^0.3.1",
-    "@c3-oss/config-tsup": "workspace:^0.2.0",
-    "@c3-oss/config-typescript": "workspace:^0.1.0",
-    "@c3-oss/config-vitest": "workspace:^0.3.0",
+    "@c3-oss/config-biome": "workspace:^1.0.0",
+    "@c3-oss/config-tsup": "workspace:^0.2.2",
+    "@c3-oss/config-typescript": "workspace:^0.1.1",
+    "@c3-oss/config-vitest": "workspace:^0.3.2",
     "concurrently": "^9.1.2",
     "npm-check-updates": "^23.0.0"
   }

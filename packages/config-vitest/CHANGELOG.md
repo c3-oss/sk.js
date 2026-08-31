@@ -1,5 +1,11 @@
 # @c3-oss/config-vitest
 
+## 0.3.2
+
+### Patch Changes
+
+- Bump workspace dependencies after Dependabot and security updates (AWS SDK, SWC, Vitest, Turbo, React, figlet, liquidjs, and related patches).
+
 ## 0.3.1
 
 ### Patch Changes

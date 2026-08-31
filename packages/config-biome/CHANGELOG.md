@@ -1,5 +1,11 @@
 # @c3-oss/config-biome
 
+## 1.0.0
+
+### Major Changes
+
+- Upgrade the shareable Biome config to Biome 2 (`@biomejs/biome` ^2.5.6), including migrated config, VCS root, and `expand: auto`.
+
 ## 0.3.1
 
 ### Patch Changes

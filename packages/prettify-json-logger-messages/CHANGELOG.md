@@ -1,13 +1,7 @@
-# @c3-oss/typeguard
+# @c3-oss/prettify-json-logger-messages
 
-## 0.2.1
+## 1.0.1
 
 ### Patch Changes
 
 - Bump workspace dependencies after Dependabot and security updates (AWS SDK, SWC, Vitest, Turbo, React, figlet, liquidjs, and related patches).
-
-## 0.2.0
-
-### Minor Changes
-
-- Function that wraps an `unknown` value to an `Error`

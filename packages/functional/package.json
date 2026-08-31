@@ -1,7 +1,7 @@
 {
   "name": "@c3-oss/functional",
   "description": "Functional style utilities",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "repository": {
@@ -29,13 +29,13 @@
     "bump:all": "npm run bump:dev && npm run bump:prod"
   },
   "devDependencies": {
-    "@c3-oss/config-biome": "workspace:^0.3.1",
-    "@c3-oss/config-tsup": "workspace:^0.2.0",
-    "@c3-oss/config-typescript": "workspace:^0.1.0",
-    "@c3-oss/config-vitest": "workspace:^0.3.0"
+    "@c3-oss/config-biome": "workspace:^1.0.0",
+    "@c3-oss/config-tsup": "workspace:^0.2.2",
+    "@c3-oss/config-typescript": "workspace:^0.1.1",
+    "@c3-oss/config-vitest": "workspace:^0.3.2"
   },
   "dependencies": {
-    "@c3-oss/typeguard": "workspace:^0.2.0",
+    "@c3-oss/typeguard": "workspace:^0.2.1",
     "fp-ts": "^2.16.11"
   }
 }
