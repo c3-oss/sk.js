@@ -1,13 +1,7 @@
-# @c3-oss/drizzle-ulid
+# @c3-oss/ink-figlet
 
-## 1.0.2
+## 0.1.1
 
 ### Patch Changes
 
 - Bump workspace dependencies after Dependabot and security updates (AWS SDK, SWC, Vitest, Turbo, React, figlet, liquidjs, and related patches).
-
-## 1.0.1
-
-### Patch Changes
-
-- Update vulnerable dependency families and supported Vitest peer range.

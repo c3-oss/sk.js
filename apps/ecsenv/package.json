@@ -1,7 +1,7 @@
 {
   "name": "@c3-oss/ecsenv",
   "description": "Fetch ECS Environments - Interactive TUI for injecting AWS ECS secrets and environment variables",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Caian Ertl <caian@c3.do>",
   "type": "module",
   "repository": {
