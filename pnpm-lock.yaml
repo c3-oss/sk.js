@@ -340,13 +340,13 @@ importers:
         specifier: ^3.1101.0
         version: 3.1121.0
       '@c3-oss/logger':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../logger
       '@c3-oss/typeguard':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.2.1
         version: link:../typeguard
       '@c3-oss/types':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../types
       camelize-ts:
         specifier: ^3.0.0
@@ -362,16 +362,16 @@ importers:
         version: 3.7.2
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-tsup':
-        specifier: workspace:^0.2.1
+        specifier: workspace:^0.2.2
         version: link:../config-tsup
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^0.3.2
         version: link:../config-vitest
       '@types/lodash':
         specifier: ^4.17.25
@@ -426,10 +426,10 @@ importers:
         version: 8.5.1(@swc/core@1.16.1(@swc/helpers@0.5.23))(jiti@2.6.1)(postcss@8.5.23)(typescript@5.9.3)(yaml@2.9.0)
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.0
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
       concurrently:
         specifier: ^9.1.2
@@ -448,10 +448,10 @@ importers:
         version: 4.1.6(@types/node@24.9.1)(@vitest/coverage-v8@4.1.6)(vite@7.3.5(@types/node@24.9.1)(jiti@2.6.1)(terser@5.51.2)(yaml@2.9.0))
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.0
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
 
   packages/drizzle-ulid:
@@ -464,16 +464,16 @@ importers:
         version: 2.4.1
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-tsup':
-        specifier: workspace:^0.2.1
+        specifier: workspace:^0.2.2
         version: link:../config-tsup
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^0.3.2
         version: link:../config-vitest
       '@types/pg':
         specifier: ^8.20.3
@@ -492,13 +492,13 @@ importers:
         version: 2.5.1
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.0
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.3.0
+        specifier: workspace:^0.3.2
         version: link:../config-vitest
       '@types/figlet':
         specifier: ^1.7.0
@@ -516,23 +516,23 @@ importers:
   packages/functional:
     dependencies:
       '@c3-oss/typeguard':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.2.1
         version: link:../typeguard
       fp-ts:
         specifier: ^2.16.11
         version: 2.16.11
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-tsup':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.2.2
         version: link:../config-tsup
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.3.0
+        specifier: workspace:^0.3.2
         version: link:../config-vitest
 
   packages/ink-figlet:
@@ -548,16 +548,16 @@ importers:
         version: 19.2.8
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-tsup':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.2.2
         version: link:../config-tsup
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.3.0
+        specifier: workspace:^0.3.2
         version: link:../config-vitest
       '@types/figlet':
         specifier: ^1.7.0
@@ -569,7 +569,7 @@ importers:
   packages/logger:
     dependencies:
       '@c3-oss/magic-values':
-        specifier: workspace:^1.0.0
+        specifier: workspace:^2.0.0
         version: link:../magic-values
       pino:
         specifier: ^9.11.0
@@ -579,16 +579,16 @@ importers:
         version: 13.1.3
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-tsup':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.2.2
         version: link:../config-tsup
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.3.0
+        specifier: workspace:^0.3.2
         version: link:../config-vitest
 
   packages/magic-values:
@@ -598,16 +598,16 @@ importers:
         version: 4.5.4
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-tsup':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.2.2
         version: link:../config-tsup
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.3.0
+        specifier: workspace:^0.3.2
         version: link:../config-vitest
 
   packages/prettify-json-logger-messages:
@@ -617,16 +617,16 @@ importers:
         version: 3.0.1
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-tsup':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.2.2
         version: link:../config-tsup
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
       '@c3-oss/config-vitest':
-        specifier: workspace:^0.3.0
+        specifier: workspace:^0.3.2
         version: link:../config-vitest
       concurrently:
         specifier: ^9.1.2
@@ -638,28 +638,28 @@ importers:
   packages/typeguard:
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-tsup':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.2.2
         version: link:../config-tsup
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
       '@c3-oss/types':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../types
 
   packages/types:
     devDependencies:
       '@c3-oss/config-biome':
-        specifier: workspace:^0.3.1
+        specifier: workspace:^1.0.0
         version: link:../config-biome
       '@c3-oss/config-tsup':
-        specifier: workspace:^0.2.0
+        specifier: workspace:^0.2.2
         version: link:../config-tsup
       '@c3-oss/config-typescript':
-        specifier: workspace:^0.1.0
+        specifier: workspace:^0.1.1
         version: link:../config-typescript
 
 packages:
