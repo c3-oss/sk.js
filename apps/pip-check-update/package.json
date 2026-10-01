@@ -39,7 +39,7 @@
   "dependencies": {
     "@renovatebot/pep440": "^4.2.2",
     "chalk": "^4.1.2",
-    "smol-toml": "^1.7.1",
+    "smol-toml": "^1.9.0",
     "ts-command-line-args": "^2.5.1"
   },
   "devDependencies": {
@@ -47,7 +47,7 @@
     "@c3-oss/config-typescript": "workspace:^",
     "@c3-oss/config-vitest": "workspace:^",
     "@swc-node/register": "^1.12.1",
-    "@swc/core": "^1.15.47",
+    "@swc/core": "^1.16.2",
     "@types/node": "^24.9.1",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",

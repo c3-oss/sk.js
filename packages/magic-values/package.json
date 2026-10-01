@@ -30,7 +30,7 @@
     "bump:all": "npm run bump:dev && npm run bump:prod"
   },
   "dependencies": {
-    "zod": "^4.4.3"
+    "zod": "^4.6.5"
   },
   "devDependencies": {
     "@c3-oss/config-biome": "workspace:^1.0.0",

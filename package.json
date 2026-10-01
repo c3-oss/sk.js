@@ -35,14 +35,14 @@
     }
   },
   "dependencies": {
-    "@biomejs/biome": "^2.5.6",
+    "@biomejs/biome": "^2.5.14",
     "@changesets/cli": "^2.31.1",
-    "@commitlint/cli": "^21.2.1",
-    "@commitlint/config-conventional": "^21.2.0",
-    "@commitlint/cz-commitlint": "^21.2.0",
+    "@commitlint/cli": "^21.2.3",
+    "@commitlint/config-conventional": "^21.2.3",
+    "@commitlint/cz-commitlint": "^21.2.3",
     "@modelcontextprotocol/inspector": "^0.21.2",
     "@swc-node/register": "^1.12.1",
-    "@swc/core": "^1.15.47",
+    "@swc/core": "^1.16.2",
     "@swc/helpers": "^0.5.23",
     "@types/node": "^24.9.1",
     "@vitest/coverage-v8": "^4.1.10",
@@ -52,7 +52,7 @@
     "inquirer": "^12.10.0",
     "npm-check-updates": "^23.0.0",
     "tsup": "^8.5.1",
-    "turbo": "^2.10.8",
+    "turbo": "^2.11.5",
     "typedoc": "^0.28.20",
     "typedoc-plugin-coverage": "^4.0.3",
     "typedoc-plugin-rename-defaults": "^0.7.3",
@@ -61,9 +61,9 @@
     "vitest": "^4.1.10"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-arm64-gnu": "^4.62.4",
-    "@rollup/rollup-linux-x64-gnu": "^4.62.4",
-    "@swc/core-darwin-x64": "^1.15.47"
+    "@rollup/rollup-linux-arm64-gnu": "^4.63.5",
+    "@rollup/rollup-linux-x64-gnu": "^4.63.5",
+    "@swc/core-darwin-x64": "^1.16.2"
   },
   "pnpm": {
     "peerDependencyRules": {
